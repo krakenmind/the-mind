@@ -183,7 +183,7 @@ export function ShareableRow({
             onInvite?.();
           }}
         >
-          Invite to Pipeshub
+          Invite to Krakenmind
         </Text>
       )}
     </Flex>
