@@ -1,37 +1,32 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { Box } from '@radix-ui/themes';
-
-// ─── Props ────────────────────────────────────────────────────────────────────
+import React from 'react'
 
 export interface FormPanelProps {
-  children: React.ReactNode;
+  children: React.ReactNode
   /** When true, form sits in the right column beside AuthHero (viewport ≥ md). */
-  splitLayout: boolean;
+  splitLayout: boolean
 }
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
 /**
- * FormPanel — the right-side panel wrapper that centres any auth form vertically.
- *
- * Used by login/page.tsx and reset-password/page.tsx.
+ * FormPanel — panel derecho que contiene el formulario, centrado vertical.
+ * Fondo paper Krakenmind. La hairline izquierda separa visualmente del hero.
  */
 export default function FormPanel({ children, splitLayout }: FormPanelProps) {
   return (
-    <Box
+    <div
+      className="relative"
       style={{
         flex: splitLayout ? '0 0 43%' : 1,
-        position: 'relative',
-        backgroundColor: 'var(--color-background)',
         height: '100dvh',
         maxHeight: '100dvh',
         overflowY: 'auto',
         width: splitLayout ? undefined : '100%',
+        backgroundColor: 'var(--color-paper)',
+        borderLeft: splitLayout ? '1px solid var(--color-rule)' : undefined,
       }}
     >
-      <Box
+      <div
         style={{
           minHeight: '100%',
           width: '100%',
@@ -41,8 +36,8 @@ export default function FormPanel({ children, splitLayout }: FormPanelProps) {
           padding: splitLayout ? '40px' : '24px 20px',
         }}
       >
-        {children}
-      </Box>
-    </Box>
-  );
+        <div style={{ width: '100%', maxWidth: '420px' }}>{children}</div>
+      </div>
+    </div>
+  )
 }
