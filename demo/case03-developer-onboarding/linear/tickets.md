@@ -64,3 +64,25 @@
 
 - **Federico Aguirre · 2026-04-29 09:14 UYT**
   > Recibido Mariano, gracias. Voy a leerme el runbook hoy.
+
+- **Mariano Silva · 2026-04-29 14:30 UYT**
+  > Heads-up al equipo: Federico Aguirre se sumó al equipo backend esta
+  > semana y va a hacer su primer deploy a BAU el martes 06-may con Camila
+  > parejándolo. DEV-1219 ya está dado de alta en este epic. Si lo ven
+  > preguntando cosas en cualquier canal, denle bola.
+
+- **Federico Aguirre · 2026-04-29 14:45 UYT**
+  > Una duda antes de arrancar: ¿el horario de change management (martes y
+  > jueves 22-00) es UYT siempre o se ajusta a horario BAU si hay cambio de
+  > hora?
+
+- **Mariano Silva · 2026-04-29 14:48 UYT**
+  > Siempre UYT. Uruguay no cambia hora, así que la ventana es fija. Si
+  > alguna vez BAU pide otra ventana específica, lo coordinamos por mail
+  > con Sebastián Calero, no informalmente. Queda en el runbook.
+
+- **Camila Núñez · 2026-04-29 14:50 UYT**
+  > Federico, para tu primera vez te recomiendo abrir el runbook de Notion
+  > al lado y seguirlo paso por paso. La parte de smoke tests es la más
+  > importante, no la skipees. Yo voy a estar conectada en `#cliente-bau`
+  > el martes 22hs.

@@ -1,11 +1,11 @@
 # Demo Krakenmind — Casos de prueba
 
-Casos preparados para demo el día siguiente. Cada caso demuestra el valor central de Krakenmind: **unir puntos repartidos en múltiples fuentes** (Linear, Notion, Gmail, Google Drive, Slack) para responder una pregunta real con evidencia trazable.
+Casos preparados para demo el día siguiente. Cada caso demuestra el valor central de Krakenmind: **unir puntos repartidos en múltiples fuentes** (Gmail, Linear, Notion, Google Drive, GitHub) para responder una pregunta real con evidencia trazable.
 
 Cada caso vive en su propia carpeta (`case01/` … `case10/`) e incluye:
 
 - `README.md` — qué demuestra, persona objetivo, **prompt sugerido**, respuesta esperada, fuentes usadas y los "puntos a unir".
-- Una subcarpeta por conector (`linear/`, `notion/`, `gmail/`, `google-drive/`, `slack/`) con un `.md` que describe **qué artefactos crear ahí** para que la demo funcione: títulos exactos, fechas, autores, contenido, IDs de tickets, channels, etc.
+- Una subcarpeta por conector (`linear/`, `notion/`, `gmail/`, `google-drive/`, `github/`) con un `.md` que describe **qué artefactos crear ahí** para que la demo funcione: títulos exactos, fechas, autores, contenido, IDs de tickets, repos, etc.
 
 Antes de la demo: cargá cada artefacto en su fuente correspondiente y dejá que Krakenmind indexe.
 
@@ -55,7 +55,7 @@ Líneas de servicio:
 - **Servidores con codename animal**: `Carpincho01..05`, `Yaguar01..03`, `Mulita-DB-01`, `Tero-Bastion`, `Hornero-API`
 - **Linear teams**: `OPS` (cloud ops), `SD` (service desk), `DEV` (dev), `SEC` (security), `FIN` (finance), `LEG` (legal), `PEOPLE` (people ops / hr)
 - **Notion workspaces**: `Cloudara HQ`, sub-páginas por cliente (`Banco Austral`, `Mercado Norte`, etc.)
-- **Slack channels**: `#general`, `#sd-tier1`, `#ops-alerts`, `#dev-backend`, `#cliente-bau`, `#cliente-mno`, `#leadership`, `#legal`
+- **GitHub repos** (relevantes para los casos): `cloudara/payments-service` (case02), `cloudara/bau-core-client` (case03)
 
 ---
 
@@ -63,22 +63,22 @@ Líneas de servicio:
 
 | # | Caso | Persona | Fuentes que une |
 |---|---|---|---|
-| **01** | [Servidor Carpincho01 inalcanzable](./case01-service-desk-carpincho01/) | Service Desk | Linear · Notion · Gmail · Slack |
-| **02** | [Bug que ya se había resuelto](./case02-bug-deja-vu/) | Developer | Linear · Slack · Notion · Drive |
-| **03** | [¿Cómo deployo a producción?](./case03-developer-onboarding/) | Developer (nuevo) | Notion · Linear · Drive |
-| **04** | [Capacidad cloud UY-1 comprometida](./case04-capacidad-cloud/) | SRE / CTO | Linear · Notion · Slack · Gmail |
-| **05** | [¿Por qué bajó la velocity?](./case05-velocity-cto/) | CTO | Linear · Notion · Gmail |
-| **06** | [Estado de Banco Austral](./case06-cuenta-clave-ceo/) | CEO | Gmail · Notion · Linear · Drive |
-| **07** | [Costos cloud anómalos este mes](./case07-costos-cloud-cfo/) | CFO / SRE | Drive · Slack · Notion · Linear |
-| **08** | [¿Tenemos un breach de SLA?](./case08-sla-breach-legal/) | Legal | Drive · Linear · Gmail · Notion |
-| **09** | [Onboarding de empleada nueva](./case09-hr-onboarding/) | People Ops | Notion · Linear · Gmail |
-| **10** | [Renovación de Mercado Norte](./case10-renovacion-sales/) | Sales / CEO | Drive · Notion · Gmail · Linear |
+| **01** | [Servidor Carpincho01 inalcanzable](./case01-service-desk-carpincho01/) | Service Desk | Gmail · Linear · Notion |
+| **02** | [Bug que ya se había resuelto](./case02-bug-deja-vu/) | Developer | Linear · Notion · Drive · GitHub |
+| **03** | [¿Cómo deployo a producción?](./case03-developer-onboarding/) | Developer (nuevo) | Gmail · Linear · Notion · Drive · GitHub |
+| **04** | [Capacidad cloud UY-1 comprometida](./case04-capacidad-cloud/) | SRE / CTO | Gmail · Linear · Notion |
+| **05** | [¿Por qué bajó la velocity?](./case05-velocity-cto/) | CTO | Gmail · Linear · Notion |
+| **06** | [Estado de Banco Austral](./case06-cuenta-clave-ceo/) | CEO | Gmail · Linear · Notion · Drive |
+| **07** | [Costos cloud anómalos este mes](./case07-costos-cloud-cfo/) | CFO / SRE | Linear · Notion · Drive |
+| **08** | [¿Tenemos un breach de SLA?](./case08-sla-breach-legal/) | Legal | Gmail · Linear · Notion · Drive |
+| **09** | [Onboarding de empleada nueva](./case09-hr-onboarding/) | People Ops | Gmail · Linear · Notion |
+| **10** | [Renovación de Mercado Norte](./case10-renovacion-sales/) | Sales / CEO | Gmail · Linear · Notion · Drive |
 
 ---
 
 ## Cómo se ven los archivos de seed
 
-Cada subcarpeta de fuente (`linear/`, `notion/`, `gmail/`, `google-drive/`, `slack/`) tiene un `.md` con secciones que describen **artefactos discretos** a crear:
+Cada subcarpeta de fuente (`linear/`, `notion/`, `gmail/`, `google-drive/`, `github/`) tiene un `.md` con secciones que describen **artefactos discretos** a crear:
 
 ```
 case01-service-desk-carpincho01/linear/tickets.md

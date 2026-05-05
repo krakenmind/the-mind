@@ -76,9 +76,11 @@
   > es ~4%.
 
 - **Mariano Silva · 2026-04-13 11:35 UYT**
-  > Gabriel mencionó dos oportunidades nuevas en #cliente-bau y #leadership
-  > apoyadas en UY-1 (ver `ACC-SLACK-01`). Le dejé mensaje que charlemos
-  > offline. Quedó pendiente, voy a escalarlo.
+  > Gabriel mencionó dos oportunidades nuevas (heads-up al equipo BAU y
+  > update de pipeline a leadership el 13-abr) apoyadas en UY-1 — quedó
+  > registrado en la bitácora "Pipeline UY-1: heads-up de preventa y
+  > disconnect con comité" (`ACC-SLACK-01`). Le dejé mensaje que
+  > charlemos offline. Quedó pendiente, voy a escalarlo.
 
 - **Mariano Silva · 2026-04-14 09:50 UYT**
   > Mandé mail a Rodrigo flageando el riesgo. Espero respuesta para definir

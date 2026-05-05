@@ -108,3 +108,98 @@
 > ---
 >
 > _Acta cerrada · 2026-04-09 · Esteban Romero_
+
+---
+
+## Página: "Bitácora — Pipeline UY-1: heads-up de preventa y disconnect con comité"
+
+- **Path**: Cloudara HQ / Leadership / Bitácoras / 2026-04 / Pipeline UY-1
+- **Owner**: Mariano Silva
+- **Authors**: Gabriel Ferré, Rodrigo Acosta, Mariano Silva
+- **Last edited**: 2026-04-13 17:05 UYT por Mariano Silva
+- **Tags**: `bitácora`, `capacidad`, `uy-1`, `preventa`, `pipeline`
+- **Anchor ID**: **ACC-SLACK-01**
+
+### Contenido (copiar tal cual)
+
+> # Bitácora — Pipeline UY-1: heads-up de preventa y disconnect con comité
+>
+> **Anchor**: `ACC-SLACK-01`
+>
+> Hilo de discusión que arrancó como dos heads-up paralelos de Gabriel
+> (uno al equipo BAU, otro a leadership) y terminó disparando el escalado
+> a Rodrigo del 14-abr. Lo dejo acá para que quede el contexto cruzado
+> con la minuta del comité del 8-abr (`ACC-CLOUD-01`) y con OPS-1567
+> (`ACC-CLOUD-02`).
+>
+> ---
+>
+> ## Heads-up al equipo BAU — 2026-04-13 11:18 UYT
+>
+> **Gabriel Ferré · 11:18** — Equipo BAU, heads up: estamos trabajando
+> dos oportunidades nuevas que probablemente van a apoyarse en UY-1, lo
+> mismo que ustedes. No debería haber colisión (el dashboard muestra
+> margen) pero quería avisar por las dudas. Si en algún momento ven
+> contención de recursos en su instancia BAU, escríbanme inmediato.
+>
+> **Mariano Silva · 11:30** — Gabriel, eso lo discutimos en el comité
+> del 8. UY-1 está más comprometido de lo que parece en el dashboard.
+> Vamos a charlar offline antes de que avances con cliente.
+>
+> **Gabriel Ferré · 11:32** — dale, te llamo a la tarde 👍
+>
+> _(la llamada nunca se concreta — Gabriel viaja a una visita comercial
+> y queda pendiente. Mariano levanta el flag por mail al día siguiente,
+> 14-abr, dirigido a Rodrigo.)_
+>
+> ---
+>
+> ## Update de pipeline a leadership — 2026-04-13 16:42 UYT
+>
+> **Gabriel Ferré · 16:42** — 👋 update de pipeline para los que vengan
+> al review del lunes:
+>
+> - **Retail mediano** (oportunidad UY) — pasamos de descubrimiento a
+>   propuesta. Lo mando esta semana. La idea es que arranque sobre UY-1
+>   (les importa latencia local, son nativos UY).
+> - **Fintech regional** — hicieron techfit la semana pasada,
+>   entusiasmados. También pidieron UY-1 por compliance de un partner.
+>   Estoy armando la propuesta para que la veamos en el comité comercial
+>   del 22.
+>
+> Confirmé en el dashboard de capacidad que UY-1 tiene ~32% libre, así
+> que ambos entran sin problema. ✌️ Cualquier cosa, gritan.
+>
+> **Rodrigo Acosta · 17:01** — Gabriel, ojo con UY-1. En el comité del 8
+> hablamos de reservar capacidad para crecimiento de los clientes
+> actuales. ¿Esteban ya bajó eso al dashboard?
+>
+> **Gabriel Ferré · 17:04** — 🤔 no sé, recién entré al dashboard hace 2
+> horas y mostraba 32% libre. Esteban, ¿está actualizado o tengo que
+> mirarlo distinto?
+>
+> _(Esteban no respondió en este hilo — leyó el ping pero estaba en otra
+> reunión. Termina respondiendo el lunes 14, ver mail de Mariano del
+> 14-abr.)_
+>
+> ---
+>
+> ## Por qué importa
+>
+> Acá quedan tres pistas alineadas:
+>
+> 1. **Gabriel está vendiendo UY-1 sobre un dato erróneo del dashboard**
+>    (cree que hay 32% libre porque la reserva del comité no quedó
+>    marcada — ver `ACC-CLOUD-01`).
+> 2. **Rodrigo intuye el problema** y pregunta al toque, pero Esteban
+>    (owner de bajar la decisión al dashboard) no responde a tiempo.
+> 3. **Mariano levanta el flag** y termina escalándolo por mail el día
+>    siguiente al CTO.
+>
+> Es exactamente el tipo de disconnect que el caso Krakenmind expone:
+> cuatro fuentes diferentes apuntando a la misma bolsa de capacidad y
+> nadie ve la foto completa.
+>
+> ---
+>
+> _Bitácora archivada · 2026-04-13 · Mariano Silva_

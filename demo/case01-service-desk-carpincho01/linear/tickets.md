@@ -25,13 +25,28 @@
 
 ### Comments
 
+> _(Nota: SD-2147 se abre a las 12:38, pero antes de abrirse hubo un
+> heads-up de la lead de SD a primera hora — quedó como nota previa al
+> ticket en el board del equipo. Pablo lo vio a la mañana pero estaba en
+> hora pico cuando entró este caso y no lo recordó.)_
+
+- **Lucía Mendoza · 2026-04-23 09:15** _(daily heads-up al equipo SD)_
+  > Heads up del cambio de anoche en UY-1 (OPS-892, Diego): cambiaron las
+  > IPs de Carpincho01-05 y Yaguar01-02. Si algún cliente reporta que no
+  > conecta a alguno de esos servidores, primero validar la IP nueva en
+  > Notion (Inventario UY-1) antes de escalar a OPS. Lo paso al daily de
+  > SD también.
+
+- **Pablo Lima · 2026-04-23 09:17**
+  > 👍 anotado.
+
 - **Pablo Lima · 2026-04-23 12:42**
   > Reproduje el error desde mi VPN admin. No responde a ping tampoco.
   > Voy a chequear con OPS si tocaron algo anoche, hubo ventana de change.
 
 - **Lucía Mendoza · 2026-04-23 12:55**
   > Pablo, fijate con Diego, me suena que hubo re-segmentación de VLAN
-  > en UY-1 anoche. Buscá en #ops-alerts.
+  > en UY-1 anoche. Mirá OPS-892, te lo dejé en el daily a la mañana.
 
 ---
 
@@ -66,8 +81,28 @@
 ### Comments
 
 - **Diego Marín · 2026-04-23 02:14**
-  > Cambio ejecutado sin incidentes. Todas las IPs nuevas responden.
-  > Avisé en #ops-alerts. Voy a actualizar el inventario en Notion ahora.
+  > 🚨 Cambios de red completados en UY-1 (OPS-892). Cambio ejecutado sin
+  > incidentes, todas las IPs nuevas responden.
+  >
+  > Servidores cliente con IP nueva:
+  > - carpincho01 IP cambiada de 10.40.11.18 a 10.40.12.34
+  > - carpincho02 IP cambiada de 10.40.11.19 a 10.40.12.35
+  > - carpincho03 IP cambiada de 10.40.11.20 a 10.40.12.36
+  > - carpincho04 IP cambiada de 10.40.11.21 a 10.40.12.37
+  > - carpincho05 IP cambiada de 10.40.11.22 a 10.40.12.38
+  > - yaguar01 IP cambiada de 10.40.11.40 a 10.40.13.10
+  > - yaguar02 IP cambiada de 10.40.11.41 a 10.40.13.11
+  >
+  > Voy a actualizar el inventario en Notion ahora. Si algún cliente
+  > reporta SSH caído mañana, es 99% que tiene la IP vieja en su VPN.
+  > Cualquier cosa me escriben.
+
+- **Mariano Silva · 2026-04-23 02:16**
+  > 👍 gracias Diego. @lucia.mendoza heads up para SD por si reportan
+  > algo mañana.
+
+- **Lucía Mendoza · 2026-04-23 02:18**
+  > Recibido, lo paso al daily de SD.
 
 - **Diego Marín · 2026-04-23 02:30**
   > Notion actualizado, ticket cerrado. Si algún cliente reporta caída de SSH,

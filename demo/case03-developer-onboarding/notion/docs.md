@@ -134,3 +134,67 @@
 >   tiene que estar en copia.
 > - **"Los smoke tests pasaron pero hay logs de error"**: rollback. No te
 >   confíes. Investigá con calma fuera de la ventana de prod.
+
+---
+
+## Página: "Bitácora — Reconfirmación 2026 de la ventana de change management BAU"
+
+- **Path**: Cloudara HQ / Cloud Ops / Cliente / BAU / Bitácoras / 2026-01 reconfirmación ventana
+- **Owner**: Lucía Castro (CEO) · co-firmada por Mariano Silva (SRE Lead)
+- **Created**: 2026-01-15 16:00 UYT
+- **Tags**: `bitacora`, `cliente:bau`, `change-mgmt`, `regulatorio`, `policy`
+
+### Contenido (copiar tal cual)
+
+> # Reconfirmación 2026 — Ventana de change management Banco Austral
+>
+> _Esta página deja constancia escrita de la reconfirmación 2026 de la
+> ventana de change management con BAU. La política operativa vive en el
+> runbook "Deploy a producción — Banco Austral". Esta bitácora es el
+> registro institucional del acuerdo (quién, cuándo, con qué autoridad)._
+>
+> **Autor**: Lucía Castro (CEO)
+> **Co-firmante**: Mariano Silva (SRE Lead)
+> **Fecha**: 2026-01-15
+> **Vigencia**: año calendario 2026 — se reconfirma cada enero en el
+> comité Cloudara-BAU.
+>
+> ## Acuerdo
+>
+> Acordado con BAU desde 2024 y reconfirmado para 2026:
+>
+> - **Martes 22:00 — 00:00 UYT**
+> - **Jueves 22:00 — 00:00 UYT**
+>
+> Fuera de esta ventana **NO** se deploya a producción de BAU sin:
+>
+> 1. Aprobación explícita de Mariano Silva (SRE Lead).
+> 2. Aprobación explícita de un C-level (Lucía Castro o Rodrigo Acosta).
+> 3. Coordinación previa con Sebastián Calero (contacto técnico BAU).
+>
+> Hotfixes: ver runbook "Deploy a producción — Banco Austral".
+>
+> ## Protocolo de comunicación durante deploy
+>
+> Antes de cada deploy, el ejecutor debe anunciar al canal de cliente:
+>
+> > 🚀 arranco deploy de \<TICKET\> · ETA \<X\>
+>
+> Cuando termina:
+>
+> > ✅ deploy completo · smoke tests OK
+>
+> Si hace falta rollback, avisar inmediato y abrir incidente en Linear
+> con severidad SEV-2 mínimo.
+>
+> ## Cambios a la ventana
+>
+> Cualquier cambio a esta ventana se discute en el comité Cloudara-BAU
+> mensual, **no por canal informal**. Todo cambio queda asentado en
+> esta bitácora con fecha, firmante y razón.
+>
+> ## Histórico
+>
+> - **2024-03-12** — Acuerdo original firmado en el kick-off del contrato.
+> - **2025-01-20** — Reconfirmado para 2025 sin cambios.
+> - **2026-01-15** — Reconfirmado para 2026 sin cambios (esta versión).

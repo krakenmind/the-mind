@@ -90,3 +90,80 @@
 >
 > Si vuelve a aparecer el síntoma de 500 en `/payments`, **chequear primero
 > esos dos puntos** antes de re-investigar la causa.
+
+---
+
+## Página: "Bitácora — DEV-1042 / decimal parsing en payments-svc"
+
+- **Path**: Cloudara HQ / Engineering / Bitácoras / 2025-10 / DEV-1042 decimal parsing
+- **Owner**: Camila Núñez
+- **Created**: 2025-10-14 10:20 UYT (volcado desde el thread interno mientras se debuggeaba)
+- **Last edited**: 2025-10-14 10:35 UYT por Camila Núñez
+- **Tags**: `bitacora`, `payments`, `regression`, `dev-1042`, `backend`
+
+### Contenido (copiar tal cual)
+
+> # Bitácora · DEV-1042 — decimal parsing en payments-svc
+>
+> _Volcado en caliente mientras debuggeaba el bug. Lo dejo acá para que
+> quede en la knowledge base y no en un canal efímero. El postmortem
+> formal va en PMT-2025-10._
+>
+> **Autor**: Camila Núñez
+> **Fecha**: 2025-10-14
+> **Estado**: causa raíz confirmada, fix en preparación.
+>
+> ---
+>
+> ## Síntoma
+>
+> El `POST /api/v2/payments` tira 500 cuando el monto tiene > 2 decimales.
+> Repro confirmado por Mercado Norte (DEV-1042).
+>
+> ## Diagnóstico paso a paso
+>
+> En `payments-svc/src/handlers/createPayment.ts:47` hacíamos:
+>
+> ```ts
+> const amount = Number(req.body.amount);
+> validateAmount(amount);
+> ```
+>
+> El `amount` llega como string (`"1234.5678"`). El `Number()` lo convierte
+> a float 64. Hasta ahí "todo bien". Pero después en `validateAmount`
+> hacemos `amount * 100` (para pasar a centavos) y aplicamos
+> `Number.isSafeInteger`. Para ciertos valores el resultado del `* 100`
+> no es safe integer y tira `RangeError`, que **no** está atrapado en el
+> handler. Por eso 500 y no 400.
+>
+> ## Fix propuesto
+>
+> 1. Helper `parseAmount(raw: string): BigDecimal` (con `decimal.js`),
+>    única forma autorizada de parsear montos.
+> 2. Flag `STRICT_DECIMAL_PARSING`. Si está on (siempre en prod) y el
+>    parse falla, devolvemos 400 con mensaje claro en lugar de 500.
+> 3. Lint rule para prohibir `Number()` y `parseFloat()` sobre cosas que
+>    se llamen `amount`, `price`, `total`, etc. Va en PR aparte (PR-491).
+>
+> ## Por qué nunca antes nos pasó
+>
+> El bug es viejo (vive desde que `payments-svc` se separó del monolito
+> en 2024 y se trajo el código viejo de cast a `Number`). Lo que cambió
+> ahora es que MNO empezó a mandar montos con 4 decimales desde su ERP.
+> Antes nadie mandaba > 2 decimales, así que el bug nunca se disparó.
+>
+> ## ¿Hay otros servicios afectados?
+>
+> Mariano me pidió chequear que `payments-svc` no sea el único lugar.
+> Grepeé todo el monorepo: el único otro lugar que toca montos afuera
+> de `payments-svc` es `billing-svc`, pero ahí ya usamos `BigDecimal`
+> desde el día uno. Esto es exclusivamente un rezago del split del
+> monolito.
+>
+> ## Lección (que va al postmortem)
+>
+> Nunca uses `Number()` ni `parseFloat()` para plata en JavaScript.
+> Cualquier monto que cruza la API tiene que pasar por `parseAmount()`.
+> Si ves 500 en `/payments` con decimales, **NO re-investigues desde
+> cero**: chequeá primero el flag `STRICT_DECIMAL_PARSING` y si hay
+> algún servicio nuevo que bypassea `parseAmount()`.

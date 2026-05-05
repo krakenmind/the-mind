@@ -32,7 +32,18 @@
   > Levanté las 4 m5.4xlarge en BR-1, ya las pasé al pool de Tomás.
   > IDs: `i-09c4a1ef`, `i-09c4b288`, `i-09c4c310`, `i-09c4d472`.
   > Te las dejo a vos para que ejecutes el load test, y te recuerdo
-  > apagarlas al cerrar (está en el runbook).
+  > apagarlas al cerrar (está en el runbook). Tomás @tomas las usa hoy
+  > y mañana. Apago el martes si para entonces ya cerramos.
+
+- **Tomás Vidal · 2026-04-05 09:18 UYT**
+  > Confirmado, recibido el handoff. Avanzo.
+
+- **Diego Marín · 2026-04-05 09:31 UYT**
+  > Heads-up: dejá registrada la fecha estimada de apagado en el
+  > ticket. La última vez se nos quedaron prendidas dos semanas.
+
+- **Mariano Silva · 2026-04-05 09:34 UYT**
+  > Anotado, está en `OPS-1488`. Tomás cierra y apaga al terminar.
 
 - **Tomás Vidal · 2026-04-05 14:42 UYT**
   > Tomadas. Empiezo el primer run a las 15:00.
@@ -46,12 +57,31 @@
   > más el viernes (revisión con el cliente). Si el viernes no se usa,
   > las apago el lunes.
 
+- **Tomás Vidal · 2026-04-07 18:34 UYT**
+  > Aprovecho a dejar lo mismo acá para que quede explícito en el
+  > ticket: cerré OPS-1488. Load test ok, p99 1.2s, 5x soportado.
+  >
+  > Una nota: **dejo las 4 VMs prendidas hasta el viernes** por si
+  > Mercado Norte pide repetir alguna corrida con un perfil de carga
+  > distinto. Si el viernes no se usa, las apago el lunes 14.
+
+- **Camila Núñez · 2026-04-07 18:41 UYT**
+  > Buenísimo, gracias. ¿Querés que coordine la corrida con el cliente
+  > o lo manejás vos?
+
+- **Tomás Vidal · 2026-04-07 18:43 UYT**
+  > Lo veo el viernes con Gabriel. Si nada confirma, apago.
+
 - **Mariano Silva · 2026-04-07 18:48 UYT**
-  > 👍, pero por favor confirmá el apagado el lunes. El runbook dice
-  > apagar al cerrar el ticket.
+  > 👀 ojo con el apagado. Dejá un recordatorio en tu calendario o me
+  > avisás. El runbook dice apagar al cerrar.
+
+- **Tomás Vidal · 2026-04-07 18:50 UYT**
+  > 👍 anotado, te aviso el lunes si quedan.
 
 > _(no hay comentarios posteriores. El ticket sigue en estado Done.
-> Las VMs no se apagaron.)_
+> Las VMs no se apagaron — Tomás nunca avisó el lunes y nadie
+> validó.)_
 
 ---
 

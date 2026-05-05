@@ -53,6 +53,21 @@
   > Mergeado y deployado. Validé con MNO, confirmaron que funciona.
   > Postmortem en Notion: PMT-2025-10. Cierro ticket.
 
+- **Mariano Silva · 2025-10-14 10:30 UYT**
+  > 👍 Camila, ojo de chequear que `payments-svc` no es el único lugar. Si hay
+  > otro servicio que parsee montos lo tenemos que cubrir también.
+
+- **Camila Núñez · 2025-10-14 10:32 UYT**
+  > Sí, ya grepeé. Lo único más afuera es `billing-svc` pero ahí ya usa
+  > BigDecimal desde el día uno. Esto es un rezago de cuando `payments-svc`
+  > se separó del monolito en 2024 y se trajo el código viejo.
+
+- **Camila Núñez · 2025-10-15 17:35 UYT**
+  > ✅ PR-487 mergeado. Postmortem en Notion (PMT-2025-10).
+  > Tldr para futuros que caigan acá: si ven 500 en /payments con decimales,
+  > chequear primero el flag `STRICT_DECIMAL_PARSING` y si algún servicio
+  > nuevo bypassea `parseAmount()`. NO re-investiguen desde cero.
+
 - **Mariano Silva · 2025-10-15 18:25 UYT**
   > Buen trabajo. Sumemos al checklist de PR review: si tocás `payments-svc`,
   > pasá por el helper `parseAmount()` y no castees a Number.
