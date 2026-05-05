@@ -145,7 +145,7 @@ export function HtmlRenderer({ fileUrl, fileName: _fileName, citations, activeCi
     style.id = styleId;
     style.textContent = `
       .${HTML_CONTENT_CLASS} {
-        font-family: 'Manrope', sans-serif;
+        font-family: 'Geist', system-ui, sans-serif;
         line-height: 1.6;
         max-width: 100%;
         word-wrap: break-word;

@@ -121,7 +121,7 @@ export function OnboardingTour() {
         boxShadow:
           '0 0 0 1px rgba(221, 234, 248, 0.08), 0 8px 40px rgba(0, 0, 0, 0.45), 0 12px 32px -16px rgba(221, 234, 248, 0.08)',
         overflow: 'hidden',
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
       }}
     >
       {/* ── Accent top edge ──────────────────────────── */}

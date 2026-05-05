@@ -723,7 +723,7 @@ export function ChatInput({
               backgroundColor: 'transparent',
               color: 'var(--slate-12)',
               fontSize: 'var(--font-size-2)',
-              fontFamily: 'Manrope, sans-serif',
+              fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
               minWidth: 0,
               textOverflow: 'ellipsis',
               overflow: 'hidden',
@@ -775,7 +775,7 @@ export function ChatInput({
       onAnimationEnd={() => setIsAnimatingIn(false)}
       style={{
         width: isMobile ? '100%' : '50rem',
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
         ...(isAnimatingIn && {
           animation: 'chatWidgetExpandIn 220ms ease-out',
         }),
@@ -1108,7 +1108,7 @@ export function ChatInput({
             resize: 'none',
             minHeight: '24px',
             maxHeight: '120px',
-            fontFamily: 'Manrope, sans-serif',
+            fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
             height: 'auto',
             overflow: 'auto',
           }}
@@ -1143,7 +1143,7 @@ export function ChatInput({
             resize: 'none',
             minHeight: isMobile ? '36px' : '44px',
             maxHeight: '120px',
-            fontFamily: 'Manrope, sans-serif',
+            fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
             height: 'auto',
             overflow: 'auto',
           }}

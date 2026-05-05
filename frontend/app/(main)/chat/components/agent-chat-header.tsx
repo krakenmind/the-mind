@@ -84,7 +84,7 @@ export function AgentChatHeader({ agentId, displayName, isMobile }: AgentChatHea
               border: 'none',
               borderRadius: 'var(--radius-2)',
               cursor: 'pointer',
-              fontFamily: 'var(--default-font-family, Manrope, sans-serif)',
+              fontFamily: 'var(--default-font-family, Geist, sans-serif)',
             }}
             aria-label={t('chat.agentHeaderMenuAria')}
           >

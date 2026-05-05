@@ -1034,7 +1034,7 @@ function ChatContent() {
             style={{
               textAlign: 'center',
               marginBottom: isInputCentered ? (isMobile ? 'var(--space-5)' : 'var(--space-6)') : isMobile ? 'var(--space-8)' : '48px',
-              fontFamily: 'Manrope, sans-serif',
+              fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
               padding: isMobile ? '0 var(--space-4)' : undefined,
             }}
           >

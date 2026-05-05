@@ -107,7 +107,7 @@ export function WorkspaceMenu({ isOpen, onClose, org, triggerRef }: WorkspaceMen
         display: 'flex',
         flexDirection: 'column',
         gap: 16,
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
       }}
     >
       {/* ── Section 1: Settings ── */}

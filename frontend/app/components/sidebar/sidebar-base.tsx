@@ -39,7 +39,7 @@ export function SidebarBase({ header, children, footer, secondaryPanel, onDismis
             position: 'fixed',
             inset: 0,
             zIndex: 200,
-            fontFamily: 'Manrope, sans-serif',
+            fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
           }}
         >
           {secondaryPanel}
@@ -55,7 +55,7 @@ export function SidebarBase({ header, children, footer, secondaryPanel, onDismis
           inset: 0,
           zIndex: 200,
           backgroundColor: 'var(--olive-1)',
-          fontFamily: 'Manrope, sans-serif',
+          fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
         }}
       >
         {/* Mobile header: logo area + × close button */}
@@ -188,7 +188,7 @@ export function SidebarBase({ header, children, footer, secondaryPanel, onDismis
         backgroundColor: 'var(--olive-1)',
         borderRight: '1px solid var(--olive-3)',
         flexShrink: 0,
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
         position: 'relative',
       }}
     >
