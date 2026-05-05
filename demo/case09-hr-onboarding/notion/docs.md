@@ -28,7 +28,7 @@
 > | 7 | Acceso a Notion (workspace Cloudara HQ)        | People Ops     | (sin ticket — admin Notion) | semana 1 |
 > | 8 | **Buddy assignment**                          | People Ops     | (sub-task PEOPLE-XX) | D-day |
 >
-> ## D-day (lunes del start date)
+> ## D-day (día del start date)
 >
 > - Recepción presencial en oficina Pocitos 9hs.
 > - Entrega de laptop + walkthrough de cuentas (Service Desk).
@@ -99,5 +99,5 @@
 >
 > | Persona             | Start date  | Rol                   | Buddy sugerido    | Confirmado |
 > |---------------------|-------------|------------------------|-------------------|------------|
-> | Federica Vázquez    | 2026-05-05  | Senior Backend Eng.    | **Camila Núñez**  | Pendiente  |
+> | Federica Vázquez    | 2026-05-06  | Senior Backend Eng.    | **Camila Núñez**  | Pendiente  |
 > | (TBD — Q3)          | 2026-07-XX  | Junior Backend Eng.    | TBD               | —          |

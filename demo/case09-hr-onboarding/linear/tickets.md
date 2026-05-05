@@ -1,6 +1,6 @@
 # Linear — Tickets para case09
 
-## PEOPLE-87 — Onboarding Federica Vázquez 2026-05-05
+## PEOPLE-87 — Onboarding Federica Vázquez 2026-05-06
 
 - **Team**: People Ops (PEOPLE)
 - **Type**: Task · **Priority**: High
@@ -8,13 +8,13 @@
 - **Assignee**: Valentina Otero · **Reporter**: Valentina Otero
 - **Labels**: `onboarding`, `dev-team`, `senior`
 - **Created**: 2026-04-28 14:20 UYT
-- **Target start date**: 2026-05-05
+- **Target start date**: 2026-05-06
 
 ### Description (copiar tal cual)
 
 > Onboarding de Federica Vázquez como Senior Backend Engineer (team DEV).
 > Manager: Camila Núñez (a confirmar como buddy también si tiene capacidad).
-> Start date: lunes 2026-05-05.
+> Start date: miércoles 2026-05-06.
 >
 > Checklist de referencia: Notion / "Onboarding — Engineer (Backend)".
 >
@@ -115,7 +115,7 @@
 
 - **Lucía Mendoza · 2026-05-03 17:50**
   > Laptop CLD-LAP-0214 lista. Google Workspace + Slack OK, VPN OK,
-  > ssh key cargada en Tero-Bastion. Entrega coordinada para lunes 9hs.
+  > ssh key cargada en Tero-Bastion. Entrega coordinada para miércoles 9hs.
   > Cierro.
 
 ---
@@ -153,8 +153,8 @@
 - **Valentina Otero · 2026-04-30 16:02**
   > Federica subió la documentación al portal de SEC. Falta tomar el ticket
   > alguien del equipo SEC. Ping en #leadership la semana pasada pero quedó
-  > sin asignar. @aquí es importante porque el lunes arranca y bloquea su
+  > sin asignar. @aquí es importante porque el miércoles arranca y bloquea su
   > acceso al sprint de Banco Austral.
 
 - **Valentina Otero · 2026-05-03 19:14**
-  > Sigue sin assignee. Voy a pingearlo el lunes temprano si no hay novedad.
+  > Sigue sin assignee. Voy a pingearlo el miércoles temprano si no hay novedad.

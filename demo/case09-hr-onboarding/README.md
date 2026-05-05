@@ -10,9 +10,7 @@
 
 Federica firmó la oferta el 28-abr. Valentina abrió PEOPLE-87 con la checklist estándar del template "Onboarding — Engineer (Backend)" en Notion. La checklist tiene 8 items críticos: laptop, cuentas IT (AWS, GitHub, VPN, ssh keys, Notion, Slack), bg check, buddy assignment, acceso al repo de cliente.
 
-A 1 día del start (Federica arranca el 5-may, hoy es 4-may), 7 sub-tickets están Done o In Progress: laptop entregada, AWS read-only creado por Mariano, GitHub invitado, VPN configurada. **Pero hay dos huecos**: SEC-211 (background check) sigue In Progress y sin asignar — eso bloquea el acceso a los repos de Banco Austral, que son críticos para el rol. Y el "Buddy assignment" del PEOPLE-87 está Pending: nadie lo agarró todavía.
-
-Una mirada cruzada también detecta que el acceso a Notion no aparece como sub-ticket en ningún Linear — está en la checklist del template pero no fue creado como ticket. Hay que validar manualmente.
+A 1 día del start (Federica arranca el 6-may, hoy es 5-may), Valentina abrió **4 sub-tickets** que cubren los items 1–6 del template: SD-2199 (laptop + Slack + Google + VPN + ssh keys), OPS-1599 (AWS read-only), DEV-1078 (GitHub org) y SEC-211 (bg check). De esos cuatro, **tres están Done** (items 1–5 listos) y **SEC-211 sigue In Progress sin assignee** — eso bloquea el acceso a los repos de Banco Austral, que son críticos para el rol. **Pero además hay dos gaps silenciosos**: el item 7 (acceso a Notion) está en el template pero **nadie creó sub-ticket**, y el item 8 (Buddy assignment) está Pending dentro del PEOPLE-87.
 
 Valentina necesita en 2 minutos saber qué falta y a quién pingear. La respuesta tiene que cruzar Notion (template + doc de capacidad de buddies), Linear (PEOPLE-87 con sus sub-tickets en OPS, DEV, SD, SEC) y Gmail (oferta firmada).
 
@@ -24,7 +22,7 @@ Valentina necesita en 2 minutos saber qué falta y a quién pingear. La respuest
 
 ## Respuesta esperada
 
-> Federica arranca mañana 5-may como Senior Backend Engineer (DEV). 7 de los 8 items de la checklist (template "Onboarding — Engineer (Backend)" en Notion) están cubiertos:
+> Federica arranca mañana 6-may como Senior Backend Engineer (DEV). De los 8 items de la checklist (template "Onboarding — Engineer (Backend)" en Notion), **5 están Done**, **1 In Progress sin assignee**, y **2 gaps**:
 >
 > - Laptop M3 + VPN configurada — **SD-2199 Done** (3-may, Service Desk).
 > - AWS read-only — **OPS-1599 Done** (2-may, Mariano Silva).

@@ -15,7 +15,7 @@
 >
 > ¡Bienvenida a Cloudara! Te confirmo todo lo que charlamos:
 >
-> - **Start date**: lunes 5 de mayo 2026, 9hs en la oficina (Pocitos, ver mapa
+> - **Start date**: miércoles 6 de mayo 2026, 9hs en la oficina (Pocitos, ver mapa
 >   en el welcome packet adjunto).
 > - **Rol**: Senior Backend Engineer, team DEV.
 > - **Manager directa**: Camila Núñez (en CC).
@@ -39,10 +39,10 @@
 > SEC el 30-abr — gracias por hacerlo a tiempo. El equipo lo está
 > procesando esta semana.
 >
-> Cualquier cosa antes del lunes, escribime a este mismo mail o por
+> Cualquier cosa antes del miércoles, escribime a este mismo mail o por
 > WhatsApp al +598 99 553 211.
 >
-> ¡Nos vemos el lunes!
+> ¡Nos vemos el miércoles!
 >
 > **Valentina Otero**
 > People Ops · Cloudara
@@ -64,7 +64,7 @@
 > Subí toda la documentación al portal de SEC esta mañana (cédula, antecedentes,
 > certificado de empleo de Globant, NDA firmado). Avisame si necesitan algo más.
 >
-> Ya tengo lista la mochila para el lunes :) ¡emocionada!
+> Ya tengo lista la mochila para el miércoles :) ¡emocionada!
 >
 > Abrazo,
 > Federica
