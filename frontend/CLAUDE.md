@@ -403,3 +403,16 @@ Only two className patterns are valid (everything else uses Radix components + i
 
 1. `className="material-icons-outlined"` - Required for Google Material Icons font
 2. `className="no-scrollbar"` - Custom utility for hiding scrollbars
+
+
+<claude-mem-context>
+# Recent Activity
+
+### May 4, 2026
+
+| ID | Time | T | Title | Read |
+|----|------|---|-------|------|
+| #4373 | 8:59 PM | ✅ | Componente KrakenWatermark creado y dependencias Tailwind v4 agregadas a package.json | ~804 |
+| #4370 | 8:56 PM | ✅ | Inicio de implementación del rebrand en branch feature/krakenmind-rebrand | ~638 |
+| #4368 | 8:47 PM | 🔵 | Arquitectura de theming de PipesHub mapeada con estrategia de reskin definida | ~961 |
+</claude-mem-context>
