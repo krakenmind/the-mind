@@ -746,7 +746,7 @@ export function AgentBuilder({ agentKey }: { agentKey: string | null }) {
             borderTop: '1px solid var(--olive-3)',
             flexShrink: 0,
             background: 'var(--olive-1)',
-            fontFamily: 'Manrope, sans-serif',
+            fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
           }}
         >
           <Button variant="soft" color="gray" onClick={() => setSidebarOpen((s) => !s)}>

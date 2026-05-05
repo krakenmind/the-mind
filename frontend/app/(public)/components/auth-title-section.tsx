@@ -1,71 +1,52 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { Box, Flex, Text } from '@radix-ui/themes';
-import { useTranslation } from 'react-i18next';
-import { PipesHubIcon } from '@/app/components/ui';
-import { LottieLoader } from '@/app/components/ui/lottie-loader';
-
-// ─── Props ────────────────────────────────────────────────────────────────────
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { KrakenMark } from '@/app/components/ui'
 
 export interface AuthTitleSectionProps {
-  /** Main heading. Defaults to "Welcome to Pipeshub". */
-  title?: string;
-  /** Subtitle below the heading. Defaults to the tagline. */
-  subtitle?: string;
+  /** Main heading. Defaults to "Welcome to Krakenmind". */
+  title?: string
+  /** Subtitle below the heading. */
+  subtitle?: string
   /** Bottom margin below the full section. Defaults to "28px". */
-  marginBottom?: string;
+  marginBottom?: string
 }
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
 /**
- * AuthTitleSection — reusable logo + heading + subtitle block
- * used at the top of every public-facing auth form.
- *
- * Matches the Figma node shared across sign-in, change-password, SSO, etc.
+ * AuthTitleSection — bloque editorial logo + título + subtítulo para auth.
+ * Reemplaza el lottie loader + Radix Text por:
+ *   - KrakenMark (PNG)
+ *   - Heading display Fraunces
+ *   - Subtitle Geist sans tone muted
  */
 export default function AuthTitleSection({
   title,
   subtitle,
   marginBottom = '28px',
 }: AuthTitleSectionProps) {
-  const { t } = useTranslation();
-  const resolvedTitle = title ?? t('auth.titleSection.defaultTitle');
-  const resolvedSubtitle = subtitle !== undefined ? subtitle : t('auth.titleSection.defaultSubtitle');
-  return (
-    <Box style={{ marginBottom }}>
-      {/* ── Logo mark ─────────────────────────────────────────── */}
-      <Box style={{ marginBottom: 'var(--space-4)' }}>
-        <LottieLoader autoplay size={40} />
-      </Box>
+  const { t } = useTranslation()
+  const resolvedTitle = title ?? t('auth.titleSection.defaultTitle')
+  const resolvedSubtitle =
+    subtitle !== undefined ? subtitle : t('auth.titleSection.defaultSubtitle')
 
-      {/* ── Heading + subtitle ────────────────────────────────── */}
-      <Flex direction="column" gap="1">
-        <Text
-          style={{
-            color: 'var(--gray-12)',
-            fontSize: '24px',
-            fontWeight: 500,
-            letterSpacing: '-0.1px',
-            lineHeight: '30px',
-          }}
-        >
-          {resolvedTitle}
-        </Text>
-        {resolvedSubtitle ? (
-          <Text
-            style={{
-              color: 'var(--gray-11)',
-              fontSize: '14px',
-              fontWeight: 400,
-              lineHeight: '20px',
-            }}
-          >
-            {resolvedSubtitle}
-          </Text>
-        ) : null}
-      </Flex>
-    </Box>
-  );
+  return (
+    <div style={{ marginBottom }}>
+      <div className="mb-5 flex items-center gap-2.5">
+        <KrakenMark size={32} variant="ink" />
+        <span className="font-display text-[19px] tracking-[-0.02em] text-ink lowercase">
+          krakenmind
+        </span>
+      </div>
+
+      <h2 className="font-display text-[26px] font-medium leading-[1.15] tracking-[-0.02em] text-ink">
+        {resolvedTitle}
+      </h2>
+      {resolvedSubtitle ? (
+        <p className="font-sans text-[14.5px] leading-[1.5] text-ink-muted mt-1.5">
+          {resolvedSubtitle}
+        </p>
+      ) : null}
+    </div>
+  )
 }

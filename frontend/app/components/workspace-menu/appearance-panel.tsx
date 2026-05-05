@@ -1,29 +1,27 @@
-'use client';
+'use client'
 
-import {
-  useThemeAppearance,
-  type ThemePreference,
-} from '@/app/components/theme-provider';
-import { useTranslation } from 'react-i18next';
-import { SubPanel, SubPanelItem } from './sub-panel';
+import { useThemeAppearance, type ThemePreference } from '@/app/components/theme-provider'
+import { useTranslation } from 'react-i18next'
+import { SubPanel, SubPanelItem } from './sub-panel'
 
 interface AppearancePanelProps {
-  isOpen: boolean;
+  isOpen: boolean
 }
 
 /**
- * Floating sub-panel for choosing appearance mode.
- * Options: System, Light, Dark.
+ * Sub-panel flotante para elegir apariencia.
+ * Krakenmind soporta 'light' (paper/teal — por default) y 'dark' (ink/abyss-soft —
+ * inspirado en la sección Instrumentation de la landing). 'system' sigue al OS.
  */
 export function AppearancePanel({ isOpen }: AppearancePanelProps) {
-  const { preference, setPreference } = useThemeAppearance();
-  const { t } = useTranslation();
+  const { preference, setPreference } = useThemeAppearance()
+  const { t } = useTranslation()
 
   const APPEARANCE_OPTIONS: { value: ThemePreference; labelKey: string; icon: string }[] = [
     { value: 'system', labelKey: 'workspaceMenu.system', icon: 'toggle_off' },
     { value: 'light', labelKey: 'workspaceMenu.light', icon: 'light_mode' },
     { value: 'dark', labelKey: 'workspaceMenu.dark', icon: 'mode_night' },
-  ];
+  ]
 
   return (
     <SubPanel isOpen={isOpen}>
@@ -37,5 +35,5 @@ export function AppearancePanel({ isOpen }: AppearancePanelProps) {
         />
       ))}
     </SubPanel>
-  );
+  )
 }

@@ -20,6 +20,8 @@ export type { FileTypeIconComponentProps } from './file-type-icons';
 export { FolderIcon } from './folder-icon';
 export type { FolderIconVariant } from './folder-icon';
 export { PipesHubIcon } from './pipes-hub-icon';
+export { default as KrakenMark } from './kraken-mark';
+export { default as KrakenWatermark } from './kraken-watermark';
 export { KnowledgeItemIcon } from './knowledge-item-icon';
 export { UserAvatar } from './user-avatar';
 export type { UserAvatarProps, UserAvatarProfile } from './user-avatar';

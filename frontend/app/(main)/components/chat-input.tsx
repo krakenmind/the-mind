@@ -230,7 +230,7 @@ export function ChatInput({
         border: '1px solid var(--slate-3)',
         borderRadius: 'var(--radius-2)',
         padding: 'var(--space-3) var(--space-4)',
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
       }}
     >
       {/* Upload Area */}
@@ -345,7 +345,7 @@ export function ChatInput({
           resize: 'none',
           minHeight: '24px',
           maxHeight: '120px',
-          fontFamily: 'Manrope, sans-serif',
+          fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
           height: 'auto',
           overflow: message.split('\n').length > 5 ? 'auto' : 'hidden',
         }}

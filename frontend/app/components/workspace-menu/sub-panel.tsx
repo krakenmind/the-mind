@@ -36,7 +36,7 @@ export function SubPanel({ isOpen, children }: SubPanelProps) {
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
       }}
     >
       {children}

@@ -1,230 +1,92 @@
-'use client';
+'use client'
 
-import React from 'react';
-import Image from 'next/image';
-import { Box, Flex, Text } from '@radix-ui/themes';
-
-// ─── Connector icons (order matches Figma layout, left to right) ─────────────
-
-const CONNECTORS = [
-  { src: '/login-page-assets/featured-connectors/hubspot.svg', name: 'HubSpot' },
-  { src: '/login-page-assets/featured-connectors/zendesk.svg', name: 'Zendesk' },
-  { src: '/login-page-assets/featured-connectors/teams.svg', name: 'Teams' },
-  { src: '/login-page-assets/featured-connectors/sharepoint.svg', name: 'SharePoint' },
-  { src: '/login-page-assets/featured-connectors/outlook.svg', name: 'Outlook' },
-  { src: '/login-page-assets/featured-connectors/dropbox.svg', name: 'Dropbox' },
-];
-
-// ─── Vector line positions from Figma (node 5005:4513) ────────────────────────
-// Each vector connects the search pill center to a connector icon below.
-// `left` positions the CENTER of each vector (used with translateX(-50%)).
-// scaleY(-1) flips the SVG vertically so the curves arc downward from the pill.
-// Vectors are ordered left-to-right matching the connector icon row.
-
-const VECTORS: { file: string; left: string; width: number }[] = [
-  { file: 'vector_6.svg', left: 'calc(50% - 97px)', width: 202 },
-  { file: 'vector_5.svg', left: 'calc(50% - 58px)', width: 122 },
-  { file: 'vector_4.svg', left: 'calc(50% - 17px)', width: 41 },
-  { file: 'vector_3.svg', left: 'calc(50% + 23.5px)', width: 41 },
-  { file: 'vector_2.svg', left: 'calc(50% + 64px)', width: 121 },
-  { file: 'vector_1.svg', left: 'calc(50% + 104px)', width: 202 },
-];
-
-// ─── Component ────────────────────────────────────────────────────────────────
+import React from 'react'
+import { KrakenMark, KrakenWatermark } from '@/app/components/ui'
 
 export interface AuthHeroProps {
   /** When false, the hero is hidden (narrow / stacked auth shell). */
-  splitLayout: boolean;
+  splitLayout: boolean
 }
 
 /**
- * AuthHero — the dark branded left panel used on all public auth pages.
- * Mirrors the Figma "Login Frame" (node 5005:4512) at 826×1024 reference size.
+ * AuthHero — panel editorial Krakenmind para auth pages.
+ * Reemplaza el hero "explainable enterprise search" por:
+ *   - Fondo paper-deep (cálido)
+ *   - Wordmark "krakenmind" + KrakenMark
+ *   - Tagline display Fraunces con palabra italic en abyss teal
+ *   - Watermark Kraken giratorio (decorativo, en esquina)
+ *   - Marca editorial de sección (§)
  */
 export default function AuthHero({ splitLayout }: AuthHeroProps) {
-  if (!splitLayout) return null;
+  if (!splitLayout) return null
 
   return (
-    <Box
+    <div
+      className="relative overflow-hidden"
       style={{
-        position: 'relative',
         flex: '0 0 57%',
         height: '100vh',
-        overflow: 'hidden',
-        backgroundColor: '#0a0a0c',
+        backgroundColor: 'var(--color-paper-deep)',
       }}
     >
-      {/* ── Background image ─────────────────────────────────────── */}
-      <img
-        src="/login-page-assets/bg/login-page.png"
-        alt=""
+      {/* Watermark — Kraken rotating slowly, decorative */}
+      <div
         aria-hidden="true"
+        className="absolute pointer-events-none"
         style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* ── Dark overlay (80% opacity per Figma) ─────────────────── */}
-      <Box
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.2)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* ── Title text — top left ────────────────────────────────── */}
-      <Text
-        style={{
-          position: 'absolute',
-          left: '32px',
-          top: '27px',
-          color: '#ffffff',
-          fontSize: '25.6px',
-          fontWeight: 400,
-          lineHeight: 'normal',
-          width: '346px',
-          textTransform: 'uppercase',
-          letterSpacing: '0.02em',
-          zIndex: 1,
-          fontFamily: 'ClashGrotesk, sans-serif',
+          right: '-180px',
+          bottom: '-180px',
+          opacity: 0.12,
+          animation: 'spin 140s linear infinite',
         }}
       >
-        Explainable Enterprise Search for modern enterprises.
-      </Text>
+        <KrakenWatermark size={680} />
+      </div>
 
-      {/* ── Search pill ──────────────────────────────────────────── */}
-      <Box
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '42.3%',
-          transform: 'translateX(-50%)',
-          width: '559px',
-          height: '74px',
-          backgroundColor: 'rgba(31, 31, 31, 0.8)',
-          backdropFilter: 'blur(5px)',
-          WebkitBackdropFilter: 'blur(5px)',
-          border: '1px solid var(--accent-9)',
-          borderRadius: '9999px',
-          boxShadow:
-            '0px 25px 33px -8px rgba(0,0,0,0.9), 0px 8px 16px -4px rgba(0,0,0,0.04), 0px 1px 1px 0px rgba(0,0,0,0.02), 0px 0px 0px 1px rgba(255,255,255,0.14)',
-          overflow: 'hidden',
-          zIndex: 2,
-        }}
-      >
-        <Flex
-          align="center"
-          style={{
-            height: '100%',
-            padding: '0 24px',
-            gap: '14px',
-          }}
-        >
-          {/* Pipeshub logo mark */}
-          <Image
-            src="/login-page-assets/pipeshub/white-square.svg"
-            alt=""
-            width={33}
-            height={33}
-            style={{ flexShrink: 0, opacity: 0.9 }}
-          />
+      {/* Top: wordmark + section mark */}
+      <div className="absolute top-0 left-0 right-0 px-12 pt-10 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <KrakenMark size={28} variant="ink" />
+          <span className="font-display text-[20px] tracking-[-0.02em] text-ink lowercase">
+            krakenmind
+          </span>
+        </div>
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-ink-muted">
+          § Acceso
+        </span>
+      </div>
 
-          {/* Search text */}
-          <Text
-            style={{
-              color: 'white',
-              fontSize: '19px',
-              fontWeight: 400,
-              textTransform: 'uppercase',
-              letterSpacing: '0.03em',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Search across all of your business apps
-          </Text>
-        </Flex>
-      </Box>
+      {/* Center: editorial tagline */}
+      <div className="absolute inset-0 flex flex-col justify-center px-12 max-w-[640px]">
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-ink-muted mb-6">
+          Inteligencia · Operación · Memoria
+        </span>
+        <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] font-medium leading-[0.98] tracking-[-0.025em] text-ink">
+          La capa operativa que vuelve <em className="text-abyss italic">confiables</em> a los agentes dentro de tu empresa.
+        </h1>
+        <p className="font-sans text-[16.5px] leading-[1.55] text-ink-muted mt-6 max-w-[480px]">
+          Memoria corporativa, búsqueda explicable y agentes que actúan con
+          contexto. Una sola plataforma, conectada a tu stack.
+        </p>
 
-      {/* ── Vector connection lines ──────────────────────────────── */}
-      {VECTORS.map((v, i) => (
-        <img
-          key={i}
-          src={`/login-page-assets/vectors/${v.file}`}
-          alt=""
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            left: v.left,
-            top: 'calc(42.3% + 37px)',
-            width: `${v.width}px`,
-            height: '136px',
-            transform: 'translateX(-50%)',
-            pointerEvents: 'none',
-            zIndex: 1,
-          }}
-        />
-      ))}
+        {/* hairline + small editorial detail */}
+        <div className="mt-10 flex items-center gap-3">
+          <span className="inline-block w-[6px] h-[6px] bg-abyss" aria-hidden="true" />
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-ink-muted">
+            sesión segura
+          </span>
+        </div>
+      </div>
 
-      {/* ── Connector icon row ───────────────────────────────────── */}
-      <Flex
-        align="center"
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(52% + 37px)',
-          transform: 'translateX(-50%)',
-          gap: '25px',
-          zIndex: 2,
-        }}
-      >
-        {CONNECTORS.map((c) => (
-          <Flex
-            key={c.name}
-            align="center"
-            justify="center"
-            style={{
-              width: '54px',
-              height: '54px',
-              borderRadius: '50%',
-              backgroundColor: 'rgba(31, 31, 31, 0.8)',
-              backdropFilter: 'blur(4px)',
-              WebkitBackdropFilter: 'blur(4px)',
-              border: '0.82px solid #0fff5d',
-              boxShadow:
-                '0px 20px 26px -7px rgba(0,0,0,0.9), 0px 7px 13px -3px rgba(0,0,0,0.04), 0px 1px 1px 0px rgba(0,0,0,0.02), 0px 0px 0px 1px rgba(255,255,255,0.14)',
-              flexShrink: 0,
-            }}
-          >
-            <Image src={c.src} alt={c.name} width={20} height={20} />
-          </Flex>
-        ))}
-      </Flex>
-
-      {/* ── Pipeshub wordmark — bottom right ─────────────────────── */}
-      <Box
-        style={{
-          position: 'absolute',
-          bottom: '32px',
-          right: '32px',
-          zIndex: 1,
-        }}
-      >
-        <Image
-          src="/login-page-assets/pipeshub/white-horizontal.svg"
-          alt="Pipeshub"
-          width={170}
-          height={45}
-          style={{ opacity: 0.95 }}
-        />
-      </Box>
-    </Box>
-  );
+      {/* Bottom: footer mark */}
+      <div className="absolute bottom-8 left-12 right-12 flex items-center justify-between">
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-ink-dim">
+          krakenmind.sh · 2026
+        </span>
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-ink-dim">
+          inteligencia, en tu operación.
+        </span>
+      </div>
+    </div>
+  )
 }

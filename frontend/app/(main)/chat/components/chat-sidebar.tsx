@@ -185,7 +185,7 @@ export function ChatSidebar() {
         height: '100%',
         padding: 'var(--space-2)',
         flexShrink: 0,
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
       }}
     >
       {/* Header */}

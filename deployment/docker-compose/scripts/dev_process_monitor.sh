@@ -43,7 +43,9 @@ cd /app/frontend
 
 # Ensure NODE_OPTIONS is set for memory limit (fallback if not in env)
 export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=2048}"
-log "Frontend starting with NODE_OPTIONS: $NODE_OPTIONS"
+# Force Next.js dev server to bind 3001 (default is 3000, which collides with Node API)
+export PORT=3001
+log "Frontend starting with NODE_OPTIONS: $NODE_OPTIONS, PORT: $PORT"
 
 npm run dev &
 FRONTEND_PID=$!

@@ -8,9 +8,13 @@ import type { OrgInfo } from './types';
 import { POPUP_WIDTH } from './types';
 import { Divider } from './menu-item';
 import { SettingsSection } from './settings-section';
-import { ExternalLinksSection } from './external-links-section';
-import { LanguagePanel } from './language-panel';
+// Krakenmind rebrand:
+// - ExternalLinksSection (Docs · GitHub stars) was removed: PipesHub project
+//   links not relevant to Krakenmind.
+// - AppearancePanel sigue (System / Light / Dark). Dark mode usa la paleta
+//   inspirada en la sección Instrumentation de la landing (ink + abyss-soft).
 import { AppearancePanel } from './appearance-panel';
+import { LanguagePanel } from './language-panel';
 
 // ============================================
 // Types
@@ -107,7 +111,7 @@ export function WorkspaceMenu({ isOpen, onClose, org, triggerRef }: WorkspaceMen
         display: 'flex',
         flexDirection: 'column',
         gap: 16,
-        fontFamily: 'Manrope, sans-serif',
+        fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
       }}
     >
       {/* ── Section 1: Settings ── */}
@@ -122,11 +126,6 @@ export function WorkspaceMenu({ isOpen, onClose, org, triggerRef }: WorkspaceMen
           logoutAndRedirect();
         }}
       />
-
-      <Divider />
-
-      {/* ── Section 2: External Links ── */}
-      <ExternalLinksSection />
 
       <Divider />
 
