@@ -7,6 +7,7 @@ import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
 import { FileIcon } from '@/app/components/ui/file-icon';
 import { useUploadLimits } from '@/lib/hooks/use-upload-limits';
 import { toast } from '@/lib/store/toast-store';
+import { randomUUID } from '@/lib/utils/uuid';
 
 // Supported file types
 const SUPPORTED_FILE_TYPES = ['TXT', 'PDF', 'DOC', 'DOCX', 'PNG', 'JPEG', 'JPG', 'SVG', 'XLS', 'XLSX', 'CSV', 'HTML', 'PPT', 'PPTX', 'MD', 'MDX'];
@@ -109,7 +110,7 @@ function DropZone({ type, onDrop, onSkippedFiles, isEmpty, maxFileSizeBytes }: D
         fileArray.forEach((file) => {
           if (file.size <= maxFileSizeBytes && isSupportedFile(file)) {
             items.push({
-              id: `file-${crypto.randomUUID()}`,
+              id: `file-${randomUUID()}`,
               name: file.name,
               size: file.size,
               type: 'file',
@@ -187,7 +188,7 @@ function DropZone({ type, onDrop, onSkippedFiles, isEmpty, maxFileSizeBytes }: D
 
             if (folderFiles.length > 0) {
               folderItems.push({
-                id: `folder-${crypto.randomUUID()}`,
+                id: `folder-${randomUUID()}`,
                 name: entry.name,
                 size: totalSize,
                 type: 'folder',
@@ -242,7 +243,7 @@ function DropZone({ type, onDrop, onSkippedFiles, isEmpty, maxFileSizeBytes }: D
             if (folderFiles.length === 0) return;
             const totalSize = folderFiles.reduce((sum, f) => sum + f.file.size, 0);
             items.push({
-              id: `folder-${crypto.randomUUID()}`,
+              id: `folder-${randomUUID()}`,
               name: folderName,
               size: totalSize,
               type: 'folder',

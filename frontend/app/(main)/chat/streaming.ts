@@ -20,6 +20,7 @@ import { useChatStore, ctxKeyFromAgent, getEffectiveModel } from './store';
 import { debugLog } from './debug-logger';
 import { loadHistoricalMessages, getThreadMessagePlainText } from './runtime';
 import { i18n } from '@/lib/i18n';
+import { randomUUID } from '@/lib/utils/uuid';
 import type { ThreadMessageLike } from '@assistant-ui/react';
 import {
   buildAssistantApiFilters,
@@ -171,12 +172,9 @@ export async function streamMessageForSlot(
   // assistant" message. Pairs with MessageList: only the last assistant whose
   // preceding user text matches `streamingQuestion` receives live SSE props
   // (avoids `!content` false positives on older agent turns).
-  const pendingAssistantId =
-    typeof globalThis !== 'undefined' &&
-    globalThis.crypto &&
-    typeof globalThis.crypto.randomUUID === 'function'
-      ? globalThis.crypto.randomUUID()
-      : "asst-pending-" + crypto.randomUUID();
+  // Uses our randomUUID helper because crypto.randomUUID() is undefined when
+  // the page is served over plain HTTP (insecure context).
+  const pendingAssistantId = "asst-pending-" + randomUUID();
 
   // Append user message + placeholder assistant + set streaming state atomically
   store.updateSlot(slotId, {
