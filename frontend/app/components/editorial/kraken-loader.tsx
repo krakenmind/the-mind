@@ -4,44 +4,73 @@ import * as React from 'react'
 import { cn } from '@/lib/utils/cn'
 
 /* -----------------------------------------------------------------------------
-   KrakenLoader — loader editorial Krakenmind.
-   3 stamps cuadrados (4px) en color abyss, pulsando con stagger.
+   KrakenLoader — loader emblemático Krakenmind.
+   Anima el kraken mark (PNG oficial) con dos efectos combinados:
+     1. Breathing — escala 1 → 1.06 + opacity 0.78 → 1 (respiración suave)
+     2. Sonar ring — círculo abyss que se expande + fade detrás del mark
+   Inline-aligned con texto vía vertical-align: middle. Aspect ratio del
+   mark (648/511 ≈ 1.27) preservado.
+
    Variantes:
-     - 'pulse'    (default, infinito): para indicadores de carga
-     - 'thinking' (más lento, suave): para "agente pensando"
-     - 'listening' (rápido, intermitente): para input por voz / streaming activo
-     - 'still'    (sin animación, opacidad fija): placeholder estático
+     - 'pulse'    (default): breathing + sonar ring lento
+     - 'thinking': breathing más lento, ring más sutil
+     - 'listening': breathing rápido, ring intenso
+     - 'still':    sin animación, opacity fija
    ----------------------------------------------------------------------------- */
 
 export type KrakenLoaderVariant = 'pulse' | 'thinking' | 'listening' | 'still'
 
+const MARK_ASPECT = 648 / 511
+
+interface Timing {
+  breath: string
+  ring: string
+  ringOpacity: number
+  breathFrom: number
+  breathTo: number
+}
+
+const TIMINGS: Record<KrakenLoaderVariant, Timing> = {
+  pulse: { breath: '1.6s', ring: '2.2s', ringOpacity: 0.32, breathFrom: 0.78, breathTo: 1 },
+  thinking: { breath: '2.4s', ring: '3.2s', ringOpacity: 0.22, breathFrom: 0.72, breathTo: 0.95 },
+  listening: { breath: '0.95s', ring: '1.4s', ringOpacity: 0.45, breathFrom: 0.85, breathTo: 1 },
+  still: { breath: '0s', ring: '0s', ringOpacity: 0, breathFrom: 1, breathTo: 1 },
+}
+
+/* Variantes de marca:
+     - 'ink': mark oscuro (sobre fondo paper)
+     - 'abyss': mark teal (sobre fondo paper-deep o ink)
+*/
+type KrakenMarkVariant = 'ink' | 'abyss'
+
+const MARK_SRC: Record<KrakenMarkVariant, string> = {
+  ink: '/kraken-mark.png',
+  abyss: '/kraken-mark-abyss.png',
+}
+
 export interface KrakenLoaderProps {
+  /** Altura del mark en px. Default 22 (alineado con texto 14-16px). */
   size?: number
   variant?: KrakenLoaderVariant
-  /** Color de los stamps. Default: abyss */
-  color?: string
+  /** Color de la marca (qué PNG usa). Default 'ink'. */
+  mark?: KrakenMarkVariant
+  /** Color del sonar ring. Default abyss. */
+  ringColor?: string
   className?: string
-  /** Etiqueta accesible. Default: 'Cargando' */
   ariaLabel?: string
-  /** Renderizado horizontal (default) o vertical */
-  direction?: 'row' | 'column'
+  /** Mostrar el ring expansivo. Default true (false en variant 'still'). */
+  showRing?: boolean
 }
 
-const TIMINGS: Record<
-  KrakenLoaderVariant,
-  { duration: string; gapMs: number; opacityFrom: number; opacityTo: number }
-> = {
-  pulse: { duration: '1.1s', gapMs: 180, opacityFrom: 0.25, opacityTo: 1 },
-  thinking: { duration: '1.6s', gapMs: 240, opacityFrom: 0.2, opacityTo: 0.9 },
-  listening: { duration: '0.7s', gapMs: 100, opacityFrom: 0.4, opacityTo: 1 },
-  still: { duration: '0s', gapMs: 0, opacityFrom: 0.7, opacityTo: 0.7 },
-}
-
-/** Custom keyframes injected once per component module */
 const KEYFRAMES_STYLE = `
-  @keyframes kraken-loader-pulse {
-    0%, 80%, 100% { opacity: var(--ko-from); transform: scaleY(1); }
-    40%           { opacity: var(--ko-to);   transform: scaleY(1.4); }
+  @keyframes kraken-breathe {
+    0%, 100% { opacity: var(--kl-from); transform: scale(1); }
+    50%      { opacity: var(--kl-to);   transform: scale(1.06); }
+  }
+  @keyframes kraken-sonar {
+    0%   { opacity: var(--kl-ring); transform: translate(-50%, -50%) scale(0.55); }
+    70%  { opacity: 0;              transform: translate(-50%, -50%) scale(1.65); }
+    100% { opacity: 0;              transform: translate(-50%, -50%) scale(1.65); }
   }
 `
 
@@ -61,107 +90,106 @@ function ensureStyles() {
 }
 
 export function KrakenLoader({
-  size = 32,
+  size = 22,
   variant = 'pulse',
-  color = 'var(--color-abyss)',
+  mark = 'ink',
+  ringColor = 'var(--color-abyss)',
   className,
   ariaLabel = 'Cargando',
-  direction = 'row',
+  showRing,
 }: KrakenLoaderProps) {
   React.useEffect(() => {
     ensureStyles()
   }, [])
 
   const t = TIMINGS[variant]
-  // Stamp size scales with overall size; gap proportional.
-  const stampSize = Math.max(3, Math.round(size / 7))
-  const gap = Math.max(2, Math.round(size / 9))
-  const animation =
-    variant === 'still' ? 'none' : `kraken-loader-pulse ${t.duration} ease-in-out infinite both`
+  const isStill = variant === 'still'
+  const ringEnabled = (showRing ?? true) && !isStill
+
+  const markWidth = Math.round(size * MARK_ASPECT)
+  // Box square — mark centered. Side = larger of width/height + small padding.
+  const box = Math.max(size, markWidth) + 6
+  const ringSize = Math.round(box * 0.78)
 
   const cssVars = {
-    '--ko-from': t.opacityFrom,
-    '--ko-to': t.opacityTo,
+    '--kl-from': t.breathFrom,
+    '--kl-to': t.breathTo,
+    '--kl-ring': t.ringOpacity,
   } as React.CSSProperties
 
   return (
     <span
       role="status"
       aria-label={ariaLabel}
-      className={cn('inline-flex items-center', className)}
+      className={cn('inline-flex items-center justify-center align-middle relative', className)}
       style={{
-        flexDirection: direction,
-        gap,
-        width: direction === 'row' ? size : stampSize,
-        height: direction === 'row' ? stampSize * 1.4 : size,
+        width: box,
+        height: box,
+        verticalAlign: 'middle',
         ...cssVars,
       }}
     >
-      {[0, 1, 2].map((i) => (
+      {ringEnabled && (
         <span
-          key={i}
           aria-hidden="true"
           style={{
-            display: 'inline-block',
-            width: stampSize,
-            height: stampSize,
-            backgroundColor: color,
-            opacity: t.opacityFrom,
-            animation,
-            animationDelay: `${i * t.gapMs}ms`,
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: ringSize,
+            height: ringSize,
+            borderRadius: '9999px',
+            border: `1px solid ${ringColor}`,
+            opacity: 0,
+            transform: 'translate(-50%, -50%) scale(0.55)',
+            animation: `kraken-sonar ${t.ring} ease-out infinite`,
+            pointerEvents: 'none',
           }}
         />
-      ))}
+      )}
+
+      <img
+        src={MARK_SRC[mark]}
+        alt=""
+        aria-hidden="true"
+        width={markWidth}
+        height={size}
+        style={{
+          width: markWidth,
+          height: size,
+          display: 'block',
+          opacity: isStill ? t.breathFrom : undefined,
+          animation: isStill ? 'none' : `kraken-breathe ${t.breath} ease-in-out infinite`,
+          willChange: 'transform, opacity',
+        }}
+      />
     </span>
   )
 }
 
 /* -----------------------------------------------------------------------------
-   KrakenSpinner — variante orbital (1 stamp girando alrededor de un eje invisible).
-   Útil cuando el espacio es chico o cuando se necesita "movimiento" tipo spinner
-   sin renderizar un círculo lleno.
+   KrakenSpinner — variante minimal: sólo el mark con breathing, sin ring.
+   Útil cuando hay otros elementos visuales cerca y el ring resulta ruidoso.
    ----------------------------------------------------------------------------- */
 export function KrakenSpinner({
   size = 18,
-  color = 'var(--color-abyss)',
+  mark = 'ink',
   className,
   ariaLabel = 'Cargando',
 }: {
   size?: number
-  color?: string
+  mark?: KrakenMarkVariant
   className?: string
   ariaLabel?: string
 }) {
   return (
-    <span
-      role="status"
-      aria-label={ariaLabel}
-      className={cn('inline-block relative', className)}
-      style={{ width: size, height: size }}
-    >
-      <span
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          border: `1.5px solid ${color}`,
-          borderRadius: 0,
-          opacity: 0.18,
-        }}
-      />
-      <span
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: Math.max(3, Math.round(size / 5)),
-          height: Math.max(3, Math.round(size / 5)),
-          backgroundColor: color,
-          animation: 'spin 0.9s linear infinite',
-          transformOrigin: `${size / 2}px ${size / 2}px`,
-        }}
-      />
-    </span>
+    <KrakenLoader
+      size={size}
+      mark={mark}
+      variant="pulse"
+      showRing={false}
+      ariaLabel={ariaLabel}
+      className={className}
+    />
   )
 }

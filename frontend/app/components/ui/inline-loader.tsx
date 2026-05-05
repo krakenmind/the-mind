@@ -7,7 +7,7 @@ import { KrakenLoader } from '@/app/components/editorial/kraken-loader'
 export interface InlineLoaderProps {
   /** Optional label shown next to the loader */
   label?: string
-  /** Loader size. Default: 18 */
+  /** Mark height in px. Default: 16 (matches body text x-height) */
   size?: number
   /** Alignment. Default: 'center' */
   align?: 'start' | 'center'
@@ -16,12 +16,13 @@ export interface InlineLoaderProps {
 }
 
 /**
- * InlineLoader — KrakenLoader (3 stamps pulsing) + optional label for
- * "loading more…" / inline list indicators and small empty-state placeholders.
+ * InlineLoader — KrakenLoader (kraken mark con breathing + sonar) + etiqueta
+ * para "loading more…" / list indicators / empty-state placeholders.
+ * Inline-aligned con texto vía verticalAlign: middle del KrakenLoader.
  */
 export function InlineLoader({
   label,
-  size = 18,
+  size = 16,
   align = 'center',
   style,
 }: InlineLoaderProps) {
@@ -43,6 +44,7 @@ export function InlineLoader({
           style={{
             color: 'var(--color-ink-muted)',
             fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
+            lineHeight: 1.2,
           }}
         >
           {label}
