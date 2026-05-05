@@ -53,7 +53,7 @@ Líneas de servicio:
 
 - **Datacenters**: `UY-1` (Montevideo), `UY-2` (Pando), `BR-1` (São Paulo, AWS region)
 - **Servidores con codename animal**: `Carpincho01..05`, `Yaguar01..03`, `Mulita-DB-01`, `Tero-Bastion`, `Hornero-API`
-- **Linear teams**: `OPS` (cloud ops), `SD` (service desk), `DEV` (dev), `SEC` (security), `FIN` (finance), `LEG` (legal)
+- **Linear teams**: `OPS` (cloud ops), `SD` (service desk), `DEV` (dev), `SEC` (security), `FIN` (finance), `LEG` (legal), `PEOPLE` (people ops / hr)
 - **Notion workspaces**: `Cloudara HQ`, sub-páginas por cliente (`Banco Austral`, `Mercado Norte`, etc.)
 - **Slack channels**: `#general`, `#sd-tier1`, `#ops-alerts`, `#dev-backend`, `#cliente-bau`, `#cliente-mno`, `#leadership`, `#legal`
 

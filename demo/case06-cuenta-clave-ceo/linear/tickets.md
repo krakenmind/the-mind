@@ -67,13 +67,13 @@
 - **Cliente**: Banco Austral
 - **Labels**: `cliente:bau`, `customer-project`, `integration`, `fraud-module`
 - **Started**: 2026-02-17
-- **ETA**: 2026-06-30
+- **ETA**: 2026-06-12 (3-day buffer antes del release fraud v1 del cliente)
 
 ### Description (copiar tal cual)
 
 > Integración con el core bancario del cliente para alimentar el módulo
 > de fraud detection v1. Hito intermedio del cliente: 15-jun (release fraud
-> v1). Esta integración es prerequisito.
+> v1). Esta integración es prerequisito y debe estar completa con buffer.
 >
 > Sub-tickets: 22 · Done: 12 · In Progress: 4 · Backlog: 6
 
@@ -98,21 +98,30 @@
 - **Created**: 2026-03-12 03:14 UYT
 - **Resolved**: 2026-03-19 18:00 UYT (8 días)
 
-### Description (copiar tal cual)
+### Description (copiar tal cual — versión canónica, comparte con case05)
 
-> Caída del flujo de checkout en producción de Mercado Norte. El war-room
-> consumió capacity de pipelines compartidos en BR-1 (los pipelines de
-> Banco Austral corren en la misma región).
+> Caída del flujo de checkout en producción de Mercado Norte. Alertas en
+> Hornero-API a las 03:12 UYT (timeouts en endpoint `/checkout/confirm`).
+> Replicación Mulita-DB-01 → BR-1 con lag creciente desde 02:50.
 >
-> Impacto colateral en Banco Austral: deploys más lentos durante la ventana
-> del incidente (no customer-facing del lado del banco; sí notado por
-> el equipo del CIO).
+> Impact: ~70% de transacciones fallando en pico nocturno. Cliente
+> notificado.
+>
+> Equipo on-call: Mariano (SRE), Camila (backend) y Tomás (frontend)
+> entran a war-room. Esto va a consumir el resto del sprint actual.
 
-### Comments (relevantes para case06)
+### Comments (relevantes para case06 — colateral Banco Austral)
+
+- **Mariano Silva · 2026-03-12 14:18**
+  > Heads-up: el war-room está consumiendo capacity de los runners de BR-1
+  > (compartidos con Banco Austral). Sus deploys arrancaron a colear.
+  > Avisé al AE de la cuenta.
 
 - **Mariano Silva · 2026-03-15 09:30**
-  > Heads-up para AE: durante el war-room los deploys de Banco Austral en
-  > BR-1 están corriendo más lentos (estamos compartiendo runners).
+  > Update colateral BAU: durante el war-room los deploys de Banco Austral
+  > en BR-1 están corriendo más lentos (compartimos runners). No es
+  > customer-facing del lado del banco, pero el equipo del CIO lo notó.
+  > Action item post-incidente: separar runners por cliente.
   > Posiblemente Felipe nos pregunte. No es caído, sólo lento.
 
 - **Gabriel Ferré · 2026-03-15 14:18**

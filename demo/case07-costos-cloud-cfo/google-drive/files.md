@@ -64,28 +64,35 @@
 
 ```csv
 date,region,service,instance_type,instance_id,tag_owner,tag_loadtest,usage_hours,cost_usd
-2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4a1ef,tomas@cloudara.uy,true,15,84.45
-2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4b288,tomas@cloudara.uy,true,15,84.45
-2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4c310,tomas@cloudara.uy,true,15,84.45
-2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4d472,tomas@cloudara.uy,true,15,84.45
-2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4a1ef,tomas@cloudara.uy,true,24,135.12
-2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4b288,tomas@cloudara.uy,true,24,135.12
-2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4c310,tomas@cloudara.uy,true,24,135.12
-2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4d472,tomas@cloudara.uy,true,24,135.12
-2026-04-07,sa-east-1,EC2,m5.4xlarge,i-09c4a1ef,tomas@cloudara.uy,true,24,135.12
+2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4a1ef,tomas@cloudara.uy,true,24,130.08
+2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4b288,tomas@cloudara.uy,true,24,130.08
+2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4c310,tomas@cloudara.uy,true,24,130.08
+2026-04-05,sa-east-1,EC2,m5.4xlarge,i-09c4d472,tomas@cloudara.uy,true,24,130.08
+2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4a1ef,tomas@cloudara.uy,true,24,130.08
+2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4b288,tomas@cloudara.uy,true,24,130.08
+2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4c310,tomas@cloudara.uy,true,24,130.08
+2026-04-06,sa-east-1,EC2,m5.4xlarge,i-09c4d472,tomas@cloudara.uy,true,24,130.08
+2026-04-07,sa-east-1,EC2,m5.4xlarge,i-09c4a1ef,tomas@cloudara.uy,true,24,130.08
 ... (filas similares cada día hasta 2026-04-30) ...
-2026-04-30,sa-east-1,EC2,m5.4xlarge,i-09c4d472,tomas@cloudara.uy,true,24,135.12
+2026-04-30,sa-east-1,EC2,m5.4xlarge,i-09c4d472,tomas@cloudara.uy,true,24,130.08
 ```
+
+> **Tasa horaria efectiva**: USD 5.42/hora (m5.4xlarge en sa-east-1 con
+> plan Cloudara). Daily = 24 × 5.42 = USD 130.08 por instancia.
 
 ### Resumen consolidado
 
 | Instance ID | Tag owner | Tag loadtest | Primer día | Último día | Días | Costo total USD |
 |---|---|---|---|---|---|---|
-| i-09c4a1ef | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,381.75 |
-| i-09c4b288 | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,381.75 |
-| i-09c4c310 | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,381.75 |
-| i-09c4d472 | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,381.75 |
-| **Total** | | | | | | **13,527.00** |
+| i-09c4a1ef | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,382.08 |
+| i-09c4b288 | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,382.08 |
+| i-09c4c310 | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,382.08 |
+| i-09c4d472 | tomas@cloudara.uy | true | 2026-04-05 | 2026-04-30 | 26 | 3,382.08 |
+| **Total** | | | | | | **13,528.32** |
+
+> **Reconciliación con el bill**: el bill reporta delta USD 13,528.20.
+> Diferencia de 12 ¢ vs CSV ($13,528.32) es redondeo final de AWS
+> (precisión sub-centavo por hora). Confirma la causa.
 
 > **Hallazgo clave**: las 4 instancias tienen `tag_loadtest=true` y
 > `tag_owner=tomas@cloudara.uy`, lo que las trazabiliza directo al

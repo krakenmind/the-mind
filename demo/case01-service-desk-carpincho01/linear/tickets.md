@@ -55,7 +55,10 @@
 > - Carpincho01: 10.40.11.18 → **10.40.12.34**
 > - Carpincho02: 10.40.11.19 → **10.40.12.35**
 > - Carpincho03: 10.40.11.20 → **10.40.12.36**
+> - Carpincho04: 10.40.11.21 → **10.40.12.37**
+> - Carpincho05: 10.40.11.22 → **10.40.12.38**
 > - Yaguar01: 10.40.11.40 → **10.40.13.10**
+> - Yaguar02: 10.40.11.41 → **10.40.13.11**
 >
 > Notificación a clientes afectados: enviada por AE el 2026-04-20 (ver Gabriel Ferré).
 > Update de doc Notion: a cargo de Diego, post-ejecución.

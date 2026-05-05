@@ -118,7 +118,7 @@
 - **Labels**: `cliente:mno`, `checkout-web`, `sla-breach`, `escalado-ops`
 - **Created**: 2026-03-19 09:14 UYT
 - **First response**: 2026-03-19 11:01 UYT (**1h 47min — BREACH**)
-- **Resolved**: 2026-03-19 16:00 UYT (workaround) / 2026-03-16 18:00 UYT (fix definitivo en OPS-1432)
+- **Resolved**: 2026-03-19 16:00 UYT (workaround); fix definitivo cerrado vía OPS-1432 el 2026-03-19 18:00 UYT
 
 ### Description (copiar tal cual)
 

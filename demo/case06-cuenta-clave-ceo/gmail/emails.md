@@ -3,10 +3,10 @@
 ## Thread "Próximo QBR + temas pendientes"
 
 - **Participants**: Felipe Aguirre <felipe.aguirre@bancoaustral.uy> · Lucía Castro <lucia@cloudara.uy> · Gabriel Ferré <gabriel@cloudara.uy> (cc)
-- **Date**: 2026-04-18
+- **Date**: 2026-05-02
 - **Labels**: `cliente:bau`, `external`, `cio`
 
-### Email 1 — Felipe Aguirre → Lucía Castro · 2026-04-18 10:24 UYT
+### Email 1 — Felipe Aguirre → Lucía Castro · 2026-05-02 10:24 UYT
 **Subject**: Próximo QBR + temas pendientes
 
 > Lucía,
@@ -31,12 +31,12 @@
 >    ventana exacta para coordinarlo internamente. Idealmente fin de semana,
 >    fuera de cierre de mes.
 >
-> Otros temas más chicos los dejo para el QBR. Nos vemos el martes.
+> Otros temas más chicos los dejo para el QBR. Nos vemos el miércoles.
 >
 > Saludos,
 > Felipe
 
-### Email 2 — Lucía Castro → Felipe Aguirre · 2026-04-18 13:10 UYT
+### Email 2 — Lucía Castro → Felipe Aguirre · 2026-05-02 13:10 UYT
 **Subject**: Re: Próximo QBR + temas pendientes
 
 > Hola Felipe,
@@ -52,18 +52,18 @@
 > Sobre la migración: vamos con propuesta de ventana al 1:1, así la
 > cerramos.
 >
-> Nos vemos el martes a las 11:00.
+> Nos vemos el miércoles a las 11:00.
 >
 > Lucía
 
-### Email 3 — Felipe Aguirre → Lucía Castro · 2026-04-18 13:48 UYT
+### Email 3 — Felipe Aguirre → Lucía Castro · 2026-05-02 13:48 UYT
 **Subject**: Re: Próximo QBR + temas pendientes
 
 > Perfecto. Una más, ya que estamos: el equipo de mobile preguntó por
 > la fecha del v3. Si hay algún cambio, prefiero saberlo de tu lado y
 > no enterarnos por el ticket. Gracias.
 
-### Email 4 — Lucía Castro → Felipe Aguirre · 2026-04-18 14:02 UYT
+### Email 4 — Lucía Castro → Felipe Aguirre · 2026-05-02 14:02 UYT
 **Subject**: Re: Próximo QBR + temas pendientes
 
 > Tomado, lo cubro en el 1:1.
