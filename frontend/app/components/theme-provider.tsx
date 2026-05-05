@@ -28,7 +28,7 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue>({
   appearance: 'light',
-  preference: 'system',
+  preference: 'light',
   setPreference: () => {},
 })
 
@@ -43,21 +43,25 @@ function resolveAppearance(pref: ThemePreference): Appearance {
 }
 
 function readStoredPreference(): ThemePreference {
-  if (typeof window === 'undefined') return 'system'
+  if (typeof window === 'undefined') return 'light'
   const stored = localStorage.getItem(THEME_STORAGE_KEY)
   if (stored === 'light' || stored === 'dark' || stored === 'system') return stored
-  return 'system'
+  // Krakenmind brand stance: light por default. Si el usuario quiere dark,
+  // lo elige explícitamente vía el toggle del workspace menu.
+  return 'light'
 }
 
 /**
  * Blocking inline script — antes del primer paint setea la clase correcta
  * sobre <html> para evitar flash of wrong theme.
+ * Default = light (Krakenmind brand). Sólo se aplica dark si el usuario
+ * lo eligió explícitamente, o si eligió 'system' y el OS está en dark.
  */
 export function ThemeScript() {
   return (
     <script
       dangerouslySetInnerHTML={{
-        __html: `(function(){try{var k='${THEME_STORAGE_KEY}',p=localStorage.getItem(k)||'system',d=p==='dark'||(p==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(d?'dark':'light');document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})()`,
+        __html: `(function(){try{var k='${THEME_STORAGE_KEY}',p=localStorage.getItem(k)||'light',d=p==='dark'||(p==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.remove('light','dark');document.documentElement.classList.add(d?'dark':'light');document.documentElement.style.colorScheme=d?'dark':'light'}catch(e){}})()`,
       }}
     />
   )
@@ -69,7 +73,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [mounted, setMounted] = useState(false)
-  const [preference, setPreferenceState] = useState<ThemePreference>('system')
+  const [preference, setPreferenceState] = useState<ThemePreference>('light')
   const [appearance, setAppearance] = useState<Appearance>('light')
 
   useEffect(() => {
