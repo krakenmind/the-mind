@@ -8,16 +8,20 @@ import type { OrgInfo } from './types';
 import { POPUP_WIDTH } from './types';
 import { Divider } from './menu-item';
 import { SettingsSection } from './settings-section';
-import { ExternalLinksSection } from './external-links-section';
+// Krakenmind rebrand:
+// - ExternalLinksSection (Docs · GitHub stars) is removed: those are PipesHub
+//   project links, not relevant to Krakenmind users.
+// - AppearancePanel (System / Light / Dark) is also gone: light-only is the
+//   brand stance. The Appearance toggle row in SettingsSection no longer
+//   renders for the same reason.
 import { LanguagePanel } from './language-panel';
-import { AppearancePanel } from './appearance-panel';
 
 // ============================================
 // Types
 // ============================================
 
 /** Which sub-panel is currently open (at most one) */
-type ActiveSubPanel = null | 'appearance' | 'language';
+type ActiveSubPanel = null | 'language';
 
 interface WorkspaceMenuProps {
   /** Whether the popup is visible */
@@ -85,7 +89,7 @@ export function WorkspaceMenu({ isOpen, onClose, org, triggerRef }: WorkspaceMen
 
   const orgLogoUrl = org?.logoUrl ?? null;
 
-  const togglePanel = (panel: 'appearance' | 'language') => {
+  const togglePanel = (panel: 'language') => {
     setActivePanel((prev) => (prev === panel ? null : panel));
   };
 
@@ -113,8 +117,6 @@ export function WorkspaceMenu({ isOpen, onClose, org, triggerRef }: WorkspaceMen
       {/* ── Section 1: Settings ── */}
       <SettingsSection
         onWorkspaceSettings={onClose}
-        onAppearanceToggle={() => togglePanel('appearance')}
-        isAppearanceActive={activePanel === 'appearance'}
         onLanguageToggle={() => togglePanel('language')}
         isLanguageActive={activePanel === 'language'}
         onLogout={() => {
@@ -122,11 +124,6 @@ export function WorkspaceMenu({ isOpen, onClose, org, triggerRef }: WorkspaceMen
           logoutAndRedirect();
         }}
       />
-
-      <Divider />
-
-      {/* ── Section 2: External Links ── */}
-      <ExternalLinksSection />
 
       <Divider />
 
@@ -173,7 +170,6 @@ export function WorkspaceMenu({ isOpen, onClose, org, triggerRef }: WorkspaceMen
       )}
 
       {/* ── Sub-panels — float to the right, top-aligned ── */}
-      <AppearancePanel isOpen={activePanel === 'appearance'} />
       <LanguagePanel isOpen={activePanel === 'language'} />
     </Box>
   );

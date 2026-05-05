@@ -1,27 +1,27 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { Flex, Text } from '@radix-ui/themes';
-import { Spinner } from './spinner';
+import React from 'react'
+import { Flex, Text } from '@radix-ui/themes'
+import { KrakenLoader } from '@/app/components/editorial/kraken-loader'
 
 export interface InlineLoaderProps {
-  /** Optional label shown next to the spinner */
-  label?: string;
-  /** Spinner size. Default: 16 */
-  size?: number;
+  /** Optional label shown next to the loader */
+  label?: string
+  /** Loader size. Default: 18 */
+  size?: number
   /** Alignment. Default: 'center' */
-  align?: 'start' | 'center';
+  align?: 'start' | 'center'
   /** Extra styles on the wrapping Flex */
-  style?: React.CSSProperties;
+  style?: React.CSSProperties
 }
 
 /**
- * InlineLoader — spinner + optional label for "loading more…" / inline list
- * indicators and small empty-state placeholders.
+ * InlineLoader — KrakenLoader (3 stamps pulsing) + optional label for
+ * "loading more…" / inline list indicators and small empty-state placeholders.
  */
 export function InlineLoader({
   label,
-  size = 16,
+  size = 18,
   align = 'center',
   style,
 }: InlineLoaderProps) {
@@ -32,16 +32,22 @@ export function InlineLoader({
       gap="2"
       style={{
         padding: 'var(--space-3)',
-        color: 'var(--slate-11)',
+        color: 'var(--color-ink-muted)',
         ...style,
       }}
     >
-      <Spinner size={size} />
+      <KrakenLoader size={size} variant="pulse" />
       {label ? (
-        <Text size="2" style={{ color: 'var(--slate-11)' }}>
+        <Text
+          size="2"
+          style={{
+            color: 'var(--color-ink-muted)',
+            fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
+          }}
+        >
           {label}
         </Text>
       ) : null}
     </Flex>
-  );
+  )
 }

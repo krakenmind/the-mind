@@ -50,3 +50,6 @@ export {
 
 export { default as KrakenMark } from '../ui/kraken-mark'
 export { default as KrakenWatermark } from '../ui/kraken-watermark'
+
+export { KrakenLoader, KrakenSpinner } from './kraken-loader'
+export type { KrakenLoaderProps, KrakenLoaderVariant } from './kraken-loader'
