@@ -65,11 +65,10 @@
 }
 
 /* -----------------------------------------------------------------------------
-   Light-only — fuerza el esquema (sacamos dark mode)
+   Color scheme — light por default, dark vía .dark en <html>.
    ----------------------------------------------------------------------------- */
-:root {
-  color-scheme: light;
-}
+:root { color-scheme: light; }
+:root.dark { color-scheme: dark; }
 
 /* -----------------------------------------------------------------------------
    Radix Themes — remap de variables a paleta Krakenmind
@@ -217,6 +216,195 @@
   --accent-surface: var(--emerald-surface);
   --accent-indicator: var(--emerald-indicator);
   --accent-track: var(--emerald-track);
+}
+
+/* =============================================================================
+   DARK MODE — inversión inspirada en la sección Instrumentation (§ 03) de la
+   landing: bg ink, texto paper con tiers de opacidad, accent abyss-soft.
+
+   Estrategia: redefinir las brand-tokens del @theme {} y las Radix CSS vars en
+   :root.dark. La inversión es semántica — `bg-paper` sigue significando
+   "superficie principal" (ahora ink), `text-ink` significa "texto principal"
+   (ahora paper). Los componentes editoriales y Radix funcionan sin cambios.
+   ============================================================================= */
+
+:root.dark,
+.dark.radix-themes,
+.radix-themes.dark {
+  /* ── Brand tokens invertidos (consumidos por utilidades Tailwind) ────── */
+  --color-paper: #0b0b0e;
+  --color-paper-dim: #131316;
+  --color-paper-deep: #1a1a1d;
+  --color-ink: #f4efe6;
+  --color-ink-muted: rgba(244, 239, 230, 0.7);
+  --color-ink-dim: rgba(244, 239, 230, 0.45);
+  --color-rule: rgba(244, 239, 230, 0.12);
+  --color-rule-soft: rgba(244, 239, 230, 0.07);
+  /* En dark, abyss-soft (más brillante) es el accent visible —
+     #0e4c4a queda casi invisible sobre #0b0b0e. */
+  --color-abyss: #1a6562;
+  --color-abyss-soft: #2a7470;
+  --color-abyss-deep: #4d8d8a;
+  --color-signal: #d05a37; /* terracota +brillo, mantiene rol de alerta */
+
+  /* ── Radix-faced chrome ───────────────────────────────────────────────── */
+  --effects-translucent: rgba(11, 11, 14, 0.7);
+  --tokens-colors-surface: rgba(244, 239, 230, 0.06);
+  --accent-surface: rgba(26, 101, 98, 0.1);
+  --white-to-dark: rgba(244, 239, 230, 0.06);
+  --page-background: #131316;
+  --file-icon-fill: #232326;
+
+  /* ── Olive (gray scale) — paper-toned dark ────────────────────────────── */
+  --olive-1: #0b0b0e;
+  --olive-2: #131316;
+  --olive-3: #1a1a1d;
+  --olive-4: #232326;
+  --olive-5: #2c2c2f;
+  --olive-6: #36363a;
+  --olive-7: #46464a;
+  --olive-8: #5d5d62;
+  --olive-9: #80807a;
+  --olive-10: #9e9d96;
+  --olive-11: #c5c2b8;
+  --olive-12: #f4efe6;
+
+  --olive-a1: rgba(244, 239, 230, 0.04);
+  --olive-a2: rgba(244, 239, 230, 0.08);
+  --olive-a3: rgba(244, 239, 230, 0.12);
+  --olive-a4: rgba(244, 239, 230, 0.18);
+  --olive-a5: rgba(244, 239, 230, 0.24);
+  --olive-a6: rgba(244, 239, 230, 0.32);
+  --olive-a7: rgba(244, 239, 230, 0.42);
+  --olive-a8: rgba(244, 239, 230, 0.55);
+  --olive-a9: rgba(244, 239, 230, 0.7);
+  --olive-a10: rgba(244, 239, 230, 0.82);
+  --olive-a11: rgba(244, 239, 230, 0.9);
+  --olive-a12: rgba(244, 239, 230, 0.96);
+
+  --olive-contrast: #0b0b0e;
+  --olive-surface: #131316;
+  --olive-indicator: #f4efe6;
+  --olive-track: #f4efe6;
+
+  /* Slate aliases */
+  --slate-1: var(--olive-1);
+  --slate-2: var(--olive-2);
+  --slate-3: var(--olive-3);
+  --slate-4: var(--olive-4);
+  --slate-5: var(--olive-5);
+  --slate-6: var(--olive-6);
+  --slate-7: var(--olive-7);
+  --slate-8: var(--olive-8);
+  --slate-9: var(--olive-9);
+  --slate-10: var(--olive-10);
+  --slate-11: var(--olive-11);
+  --slate-12: var(--olive-12);
+  --slate-a1: var(--olive-a1);
+  --slate-a2: var(--olive-a2);
+  --slate-a3: var(--olive-a3);
+  --slate-a4: var(--olive-a4);
+  --slate-a5: var(--olive-a5);
+  --slate-a6: var(--olive-a6);
+  --slate-a7: var(--olive-a7);
+  --slate-a8: var(--olive-a8);
+  --slate-a9: var(--olive-a9);
+  --slate-a10: var(--olive-a10);
+  --slate-a11: var(--olive-a11);
+  --slate-a12: var(--olive-a12);
+  --slate-contrast: var(--olive-contrast);
+  --slate-surface: var(--olive-surface);
+  --slate-indicator: var(--olive-indicator);
+  --slate-track: var(--olive-track);
+
+  /* ── Emerald (accent) — abyss-soft como pivote en dark ────────────────── */
+  --emerald-1: #08110f;
+  --emerald-2: #0c1a17;
+  --emerald-3: #0d2622;
+  --emerald-4: #0f322d;
+  --emerald-5: #114039;
+  --emerald-6: #155049;
+  --emerald-7: #1a6562;
+  --emerald-8: #237a76;
+  --emerald-9: #1a6562;
+  --emerald-10: #2a7470;
+  --emerald-11: #5fa3a0;
+  --emerald-12: #b1d0cd;
+
+  --emerald-a1: rgba(26, 101, 98, 0.05);
+  --emerald-a2: rgba(26, 101, 98, 0.1);
+  --emerald-a3: rgba(26, 101, 98, 0.18);
+  --emerald-a4: rgba(26, 101, 98, 0.28);
+  --emerald-a5: rgba(26, 101, 98, 0.4);
+  --emerald-a6: rgba(26, 101, 98, 0.55);
+  --emerald-a7: rgba(42, 116, 112, 0.7);
+  --emerald-a8: rgba(42, 116, 112, 0.86);
+  --emerald-a9: rgba(26, 101, 98, 1);
+  --emerald-a10: rgba(42, 116, 112, 1);
+  --emerald-a11: rgba(95, 163, 160, 1);
+  --emerald-a12: rgba(177, 208, 205, 1);
+
+  --emerald-contrast: #f4efe6;
+  --emerald-surface: rgba(13, 38, 34, 0.6);
+  --emerald-indicator: #1a6562;
+  --emerald-track: #2a7470;
+}
+
+/* Cuando estamos en dark, el remap accent → emerald también aplica */
+.radix-themes.dark[data-accent-color='emerald'],
+.radix-themes.dark[data-accent-color='jade'] {
+  --accent-1: var(--emerald-1);
+  --accent-2: var(--emerald-2);
+  --accent-3: var(--emerald-3);
+  --accent-4: var(--emerald-4);
+  --accent-5: var(--emerald-5);
+  --accent-6: var(--emerald-6);
+  --accent-7: var(--emerald-7);
+  --accent-8: var(--emerald-8);
+  --accent-9: var(--emerald-9);
+  --accent-10: var(--emerald-10);
+  --accent-11: var(--emerald-11);
+  --accent-12: var(--emerald-12);
+  --accent-a1: var(--emerald-a1);
+  --accent-a2: var(--emerald-a2);
+  --accent-a3: var(--emerald-a3);
+  --accent-a4: var(--emerald-a4);
+  --accent-a5: var(--emerald-a5);
+  --accent-a6: var(--emerald-a6);
+  --accent-a7: var(--emerald-a7);
+  --accent-a8: var(--emerald-a8);
+  --accent-a9: var(--emerald-a9);
+  --accent-a10: var(--emerald-a10);
+  --accent-a11: var(--emerald-a11);
+  --accent-a12: var(--emerald-a12);
+  --accent-contrast: var(--emerald-contrast);
+  --accent-surface: var(--emerald-surface);
+  --accent-indicator: var(--emerald-indicator);
+  --accent-track: var(--emerald-track);
+}
+
+/* Sombras editoriales en dark — más profundas, contraste sobre ink */
+:root.dark {
+  --shadow-1: 0 0 0 1px rgba(244, 239, 230, 0.1);
+  --shadow-2: 0 1px 2px 0 rgba(0, 0, 0, 0.45);
+  --shadow-3: 0 2px 8px 0 rgba(0, 0, 0, 0.55);
+  --shadow-4: 0 4px 16px 0 rgba(0, 0, 0, 0.55);
+  --shadow-5: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  --shadow-6: 0 0 0 1px rgba(244, 239, 230, 0.1), 0 12px 60px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* En dark, el grano de papel queda invisible (multiply sobre ink). Reducimos
+   opacidad y dejamos que screen-style noise sume textura sutil. */
+:root.dark body::before {
+  opacity: 0.04;
+  mix-blend-mode: screen;
+}
+
+/* El KrakenMark ink (silueta oscura) sería invisible sobre fondo dark.
+   Lo invertimos vía filter para que se vea como silueta paper-colored.
+   La variante 'abyss' (teal) no necesita cambio — ya pop en dark. */
+:root.dark img[src='/kraken-mark.png'] {
+  filter: invert(0.92) brightness(1.05);
 }
 
 /* Modos de chat (anteriormente coloreados con iris/orange/blue/green) →
