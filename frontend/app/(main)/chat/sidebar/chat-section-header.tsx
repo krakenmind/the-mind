@@ -1,8 +1,6 @@
 'use client';
 
-import { Flex, IconButton } from '@radix-ui/themes';
-import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
-import { ELEMENT_HEIGHT, ICON_SIZE_DEFAULT } from '@/app/components/sidebar';
+import { Plus } from 'lucide-react';
 
 interface ChatSectionHeaderProps {
   title: string;
@@ -14,44 +12,39 @@ interface ChatSectionHeaderProps {
 }
 
 /**
- * Section header for a chat group ("Shared Chats", "Your Chats").
- * Shares the same label styling as TimeGroup sub-headings,
- * with an optional "+" action button on the right.
+ * Editorial section header — mono uppercase trackeado eyebrow,
+ * ink-muted color, hairline-thin "+" affordance on the right.
+ *
+ * Used for "Shared Chats", "Your Chats", "My Agents".
  */
-export function ChatSectionHeader({ title, onAdd, addAriaLabel, onTitleClick }: ChatSectionHeaderProps) {
+export function ChatSectionHeader({
+  title,
+  onAdd,
+  addAriaLabel,
+  onTitleClick,
+}: ChatSectionHeaderProps) {
   return (
-    <Flex
-      align="center"
-      justify="between"
-      style={{
-        height: ELEMENT_HEIGHT,
-        padding: '0 var(--space-3)',
-      }}
-    >
-      <span
+    <div className="flex items-center justify-between h-8 px-3">
+      <button
+        type="button"
         onClick={onTitleClick}
-        style={{
-          fontSize: 12,
-          fontWeight: 500,
-          lineHeight: 'var(--line-height-1)',
-          letterSpacing: '0.04px',
-          color: 'var(--slate-11)',
-          cursor: onTitleClick ? 'pointer' : 'default',
-        }}
+        disabled={!onTitleClick}
+        className={`font-mono text-[10.5px] uppercase tracking-[0.18em] font-medium text-ink-muted bg-transparent border-0 p-0 ${
+          onTitleClick ? 'cursor-pointer hover:text-ink' : 'cursor-default'
+        }`}
       >
         {title}
-      </span>
+      </button>
       {onAdd && (
-        <IconButton
-          variant="ghost"
-          size="1"
-          color="gray"
+        <button
+          type="button"
           onClick={onAdd}
           aria-label={addAriaLabel ?? 'Add'}
+          className="inline-flex items-center justify-center h-5 w-5 text-ink-muted hover:text-abyss transition-colors rounded-none"
         >
-          <MaterialIcon name="add" size={ICON_SIZE_DEFAULT} color="var(--slate-11)" />
-        </IconButton>
+          <Plus size={14} strokeWidth={1.5} />
+        </button>
       )}
-    </Flex>
+    </div>
   );
 }

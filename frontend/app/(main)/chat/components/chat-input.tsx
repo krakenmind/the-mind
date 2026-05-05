@@ -788,13 +788,13 @@ export function ChatInput({
         !modeChromeOpen && (
         <Flex
           align="center"
+          className="bg-paper-dim border-rule"
           style={{
-            backgroundColor: 'var(--slate-1)',
-            borderTop: '1px solid var(--slate-5)',
-            borderLeft: '1px solid var(--slate-5)',
-            borderRight: '1px solid var(--slate-5)',
-            borderTopLeftRadius: 'var(--radius-1)',
-            borderTopRightRadius: 'var(--radius-1)',
+            borderTop: '1px solid',
+            borderLeft: '1px solid',
+            borderRight: '1px solid',
+            borderTopLeftRadius: '10px',
+            borderTopRightRadius: '10px',
             padding: 'var(--space-2) var(--space-3)',
           }}
         >
@@ -810,27 +810,26 @@ export function ChatInput({
       {uploadedFiles.length > 0 && (
         <Flex
           align="center"
+          className="bg-paper-dim no-scrollbar"
           style={{
-            backgroundColor: 'var(--slate-1)',
             borderTop:
               selectedCollections.length > 0 && !isAgentChat && !isCollectionsPanelOpen && !modeChromeOpen
                 ? 'none'
-                : '1px solid var(--slate-5)',
-            borderLeft: '1px solid var(--slate-5)',
-            borderRight: '1px solid var(--slate-5)',
+                : '1px solid var(--color-rule)',
+            borderLeft: '1px solid var(--color-rule)',
+            borderRight: '1px solid var(--color-rule)',
             borderTopLeftRadius:
               selectedCollections.length > 0 && !isAgentChat && !isCollectionsPanelOpen && !modeChromeOpen
                 ? '0'
-                : 'var(--radius-1)',
+                : '10px',
             borderTopRightRadius:
               selectedCollections.length > 0 && !isAgentChat && !isCollectionsPanelOpen && !modeChromeOpen
                 ? '0'
-                : 'var(--radius-1)',
+                : '10px',
             padding: 'var(--space-3) var(--space-4)',
             overflowX: 'auto',
             overflowY: 'hidden',
           }}
-          className="no-scrollbar"
         >
           <Flex gap="2" style={{ minWidth: 'max-content' }}>
             {uploadedFiles.map((file) => (
@@ -913,13 +912,13 @@ export function ChatInput({
       {/* Action pill bar — sits above the main input container when edit or regenerate is active. */}
       {isActionMode && activeMessageAction && (
         <Flex
+          className="bg-paper-dim"
           style={{
-            background: 'var(--olive-1)',
-            borderTop: '1px solid var(--olive-5)',
-            borderLeft: '1px solid var(--olive-5)',
-            borderRight: '1px solid var(--olive-5)',
-            borderTopLeftRadius: 'var(--radius-2)',
-            borderTopRightRadius: 'var(--radius-2)',
+            borderTop: '1px solid var(--color-rule)',
+            borderLeft: '1px solid var(--color-rule)',
+            borderRight: '1px solid var(--color-rule)',
+            borderTopLeftRadius: '10px',
+            borderTopRightRadius: '10px',
             padding: 'var(--space-3) var(--space-4)',
           }}
         >
@@ -935,11 +934,12 @@ export function ChatInput({
       <Flex
       direction="column"
       gap="2"
+      className="bg-paper"
       style={{
-        backdropFilter: 'blur(25px)',
-        background: (isInputFocused || message.trim() || isListening) ? 'var(--olive-2)' : 'var(--effects-translucent)',
-        transition: 'background 0.15s ease',
-        border: (!isStreaming && (isInputFocused || message.trim() || isEditMode || isListening)) ? '1px solid var(--accent-11)' : '1px solid var(--slate-3)',
+        transition: 'border-color 0.15s ease, background 0.15s ease',
+        border: (!isStreaming && (isInputFocused || message.trim() || isEditMode || isListening))
+          ? '1px solid var(--color-abyss)'
+          : '1px solid var(--color-rule)',
         // Flatten top corners whenever there is an element directly above (collections bar,
         // uploaded files preview, or the action pill bar) to avoid a double-radius gap.
         borderRadius:
@@ -949,8 +949,8 @@ export function ChatInput({
             !modeChromeOpen) ||
           uploadedFiles.length > 0 ||
           isActionMode
-            ? '0 0 var(--radius-2) var(--radius-2)'
-            : 'var(--radius-2)',
+            ? '0 0 10px 10px'
+            : '10px',
         padding: isMobile ? 'var(--space-3) var(--space-4)' : 'var(--space-2) var(--space-4)',
       }}
     >
@@ -1133,17 +1133,18 @@ export function ChatInput({
           placeholder={isListening ? t('chat.listening') : resolvedPlaceholder}
           disabled={isRegenerateMode}
           rows={1}
+          className="placeholder:text-ink-dim"
           style={{
             width: '100%',
             backgroundColor: 'transparent',
             outline: 'none',
             border: 'none',
-            fontSize: 'var(--font-size-2)',
-            color: isRegenerateMode ? 'var(--slate-a8)' : 'var(--slate-12)',
+            fontSize: '15px',
+            color: isRegenerateMode ? 'var(--color-ink-dim)' : 'var(--color-ink)',
             resize: 'none',
             minHeight: isMobile ? '36px' : '44px',
             maxHeight: '120px',
-            fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
+            fontFamily: 'var(--font-sans), Geist, system-ui, sans-serif',
             height: 'auto',
             overflow: 'auto',
           }}

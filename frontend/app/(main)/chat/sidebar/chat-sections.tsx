@@ -2,7 +2,6 @@
 
 import React, { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Flex } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { useChatStore, selectPendingForSidebar } from '@/chat/store';
 import { useCommandStore } from '@/lib/store/command-store';
@@ -102,10 +101,8 @@ export const ChatSections = React.memo(function ChatSections({
   }, [pendingConversations, slots, conversations]);
 
   return (
-    <Flex
-      direction="column"
-      gap="3"
-      style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}
+    <div
+      className="flex flex-col flex-1 min-h-0 overflow-hidden"
     >
       {/* Shared Chats — flat list (no time grouping) */}
       <ChatSection
@@ -121,6 +118,9 @@ export const ChatSections = React.memo(function ChatSections({
         onMore={() => onOpenMoreChats('shared')}
         emptyStateText={t('chat.noSharedChats')}
       />
+
+      {/* Hairline divider between sections */}
+      <hr className="border-0 h-px bg-rule-soft mx-3 my-2" />
 
       {/* Your Chats — time-grouped */}
       <ChatSection
@@ -138,6 +138,6 @@ export const ChatSections = React.memo(function ChatSections({
         onMore={() => onOpenMoreChats('your')}
         pendingConversations={activePendingConversations}
       />
-    </Flex>
+    </div>
   );
 });

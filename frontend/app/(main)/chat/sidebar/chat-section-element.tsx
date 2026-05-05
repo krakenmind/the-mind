@@ -2,15 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Sparkles } from 'lucide-react';
 import { buildChatHref } from '@/chat/build-chat-url';
-import { ChatStarIcon } from '@/app/components/ui/chat-star-icon';
-import { Box, Flex } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { Conversation } from '@/chat/types';
 import { useChatStore, isConversationStreamingInScope } from '@/chat/store';
 import { ChatApi } from '@/chat/api';
 import { AgentsApi } from '@/app/(main)/agents/api';
-import { ICON_SIZE_DEFAULT, CHAT_ITEM_HEIGHT } from '@/app/components/sidebar';
 import { SidebarItem } from './sidebar-item';
 import { ChatItemMenu } from './chat-item-menu';
 import { DeleteChatDialog, ArchiveChatDialog } from './dialogs';
@@ -30,19 +28,12 @@ function TypingTitle({ title }: { title: string }) {
 /** Title text with a streaming spinner — shared between ChatSectionElement and GeneratingTitleItem. */
 function StreamingTitleLabel({ title }: { title: string }) {
   return (
-    <Flex align="center" gap="2" style={{ minWidth: 0, width: '100%' }}>
-      <span
-        style={{
-          flex: 1,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}
-      >
+    <span className="flex items-center gap-2 min-w-0 w-full">
+      <span className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap">
         {title}
       </span>
-      <Spinner size={12} color="var(--accent-11)" />
-    </Flex>
+      <Spinner size={12} color="var(--color-abyss)" />
+    </span>
   );
 }
 
@@ -219,17 +210,11 @@ export function ChatSectionElement({ conversation, isActive, onClick, agentId }:
   // Inline rename mode — render a plain input instead of SidebarItem
   if (isRenaming) {
     return (
-      <Flex
-        align="center"
-        style={{
-          height: CHAT_ITEM_HEIGHT,
-          padding: '0 var(--space-3)',
-          borderRadius: 'var(--radius-1)',
-          backgroundColor: 'var(--olive-3)',
-          border: '1px solid var(--olive-4)',
-          boxSizing: 'border-box',
-        }}
-      >
+      <div className="relative flex items-center h-8 px-3 bg-paper-dim box-border">
+        <span
+          aria-hidden="true"
+          className="absolute left-0 top-0 bottom-0 w-[2px] bg-abyss"
+        />
         <input
           ref={renameInputRef}
           value={renameValue}
@@ -237,20 +222,15 @@ export function ChatSectionElement({ conversation, isActive, onClick, agentId }:
           onBlur={handleRenameBlur}
           onKeyDown={handleRenameKeyDown}
           disabled={isSavingRename}
+          className="flex-1 bg-transparent border-0 outline-none font-sans text-ink"
           style={{
-            flex: 1,
-            background: 'transparent',
-            border: 'none',
-            outline: 'none',
-            fontSize: 14,
+            fontSize: 13.5,
             fontWeight: 500,
-            lineHeight: 'var(--line-height-2)',
-            color: 'var(--slate-12)',
-            font: 'inherit',
+            lineHeight: 1.4,
           }}
         />
-        {isSavingRename && <Spinner size={12} color="var(--slate-10)" />}
-      </Flex>
+        {isSavingRename && <Spinner size={12} color="var(--color-ink-muted)" />}
+      </div>
     );
   }
 
@@ -271,8 +251,8 @@ export function ChatSectionElement({ conversation, isActive, onClick, agentId }:
         isActive={isActive}
         href={conversationHref}
         onClick={onClick}
-        textColor="var(--slate-12)"
-        fontWeight={500}
+        textColor={isActive ? 'var(--color-abyss)' : 'var(--color-ink)'}
+        fontWeight={isActive ? 500 : 400}
         forceHighlight={menuOpen}
         onHoverChange={setIsHovered}
         rightSlot={
@@ -353,8 +333,8 @@ export function GeneratingTitleItem({ slotId }: { slotId: string }) {
         href={href}
         onClick={handleClick}
         label={<StreamingTitleLabel title={pendingTitle} />}
-        textColor="var(--slate-12)"
-        fontWeight={500}
+        textColor={isActive ? 'var(--color-abyss)' : 'var(--color-ink)'}
+        fontWeight={isActive ? 500 : 400}
       />
     );
   }
@@ -370,8 +350,8 @@ export function GeneratingTitleItem({ slotId }: { slotId: string }) {
           <span className="generating-shimmer-overlay" aria-hidden="true">{t('chat.generatingTitle')}</span>
         </span>
       }
-      textColor="var(--slate-11)"
-      fontWeight={500}
+      textColor="var(--color-ink-muted)"
+      fontWeight={400}
     />
   );
 }
@@ -384,14 +364,16 @@ export function StartChatButton({ onClick }: { onClick: () => void }) {
   return (
     <SidebarItem
       icon={
-        <ChatStarIcon
-          size={ICON_SIZE_DEFAULT}
-          color="var(--accent-11)"
+        <Sparkles
+          size={16}
+          strokeWidth={1.5}
+          className="text-abyss shrink-0"
         />
       }
       label={t('chat.startChat')}
       onClick={onClick}
-      textColor="var(--accent-11)"
+      textColor="var(--color-abyss)"
+      fontWeight={500}
     />
   );
 }
@@ -403,12 +385,11 @@ export function ChatItemSkeleton() {
   return (
     <SidebarItem
       label={
-        <Box
+        <span
+          className="block w-3/4"
           style={{
-            height: 'var(--space-4)',
-            backgroundColor: 'var(--slate-4)',
-            borderRadius: 'var(--radius-1)',
-            width: '75%',
+            height: 12,
+            backgroundColor: 'var(--color-rule-soft)',
             animation: 'shimmer-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           }}
         />

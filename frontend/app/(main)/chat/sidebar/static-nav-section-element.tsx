@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '@radix-ui/themes';
 import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
-import { ELEMENT_HEIGHT, ELEMENT_BORDER, ICON_SIZE_DEFAULT } from '@/app/components/sidebar';
+import { ICON_SIZE_DEFAULT } from '@/app/components/sidebar';
+import { cn } from '@/lib/utils/cn';
 
 interface StaticNavSectionElementProps {
   icon: string;
@@ -14,6 +14,7 @@ interface StaticNavSectionElementProps {
 
 /**
  * A single navigation menu button in the static upper section.
+ * Editorial Krakenmind language — hairline, no rounded, ink/abyss states.
  */
 export function StaticNavSectionElement({
   icon,
@@ -23,32 +24,35 @@ export function StaticNavSectionElement({
   accent = false,
 }: StaticNavSectionElementProps) {
   return (
-    <Button
-      variant={isActive ? 'soft' : 'ghost'}
-      size="2"
+    <button
+      type="button"
       onClick={onClick}
-      color={accent ? undefined : 'gray'}
-      style={{
-        width: '100%',
-        height: ELEMENT_HEIGHT,
-        justifyContent: 'flex-start',
-        borderRadius: 'var(--radius-1)',
-        ...(isActive && { border: ELEMENT_BORDER }),
-      }}
+      className={cn(
+        'group relative flex w-full items-center gap-2 h-8 px-3',
+        'rounded-none transition-colors duration-150 select-none',
+        isActive
+          ? 'bg-paper-dim text-abyss'
+          : 'bg-transparent text-ink-muted hover:bg-paper-dim hover:text-ink',
+        accent && !isActive && 'text-abyss',
+      )}
     >
+      {isActive && (
+        <span
+          aria-hidden="true"
+          className="absolute left-0 top-0 bottom-0 w-[2px] bg-abyss"
+        />
+      )}
       <MaterialIcon name={icon} size={ICON_SIZE_DEFAULT} />
       <span
+        className="font-sans text-left flex-1 truncate"
         style={{
-          flex: 1,
-          textAlign: 'left',
-          fontWeight: 400,
-          fontSize: 14,
-          lineHeight: 'var(--line-height-2)',
-          color: 'var(--slate-11)',
+          fontSize: 13.5,
+          fontWeight: isActive ? 500 : 400,
+          lineHeight: 1.4,
         }}
       >
         {label}
       </span>
-    </Button>
+    </button>
   );
 }

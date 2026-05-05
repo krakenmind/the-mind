@@ -37,6 +37,7 @@ import { ChatSearch } from './components/search';
 import { isCommandKey } from '@/lib/utils/platform';
 import { LottieLoader } from '@/app/components/ui/lottie-loader';
 import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
+import { Eyebrow, Heading, KrakenMark } from '@/app/components/editorial';
 import { useUserStore } from '@/lib/store/user-store';
 import { ServiceGate } from '@/app/components/ui/service-gate';
 import { SIDEBAR_CONVERSATIONS_PAGE_SIZE } from './constants';
@@ -869,12 +870,12 @@ function ChatContent() {
     <Flex
       direction="column"
       align="center"
+      className="bg-paper"
       style={{
         height: '100%',
         width: '100%',
         position: 'relative',
         overflow: 'hidden',
-        background: 'linear-gradient(to bottom, var(--olive-2), var(--olive-1))',
       }}
     >
 
@@ -944,34 +945,31 @@ function ChatContent() {
             width: '100%',
           }}
         >
-          {/* Logo */}
-          <Box style={{ marginBottom: 'var(--space-4)' }}>
-            <LottieLoader autoplay loop style={{ width: isMobile ? 64 : 80, height: isMobile ? 64 : 80 }} />
+          {/* KrakenMark — editorial logo */}
+          <Box style={{ marginBottom: 'var(--space-5)' }}>
+            <KrakenMark size={isMobile ? 44 : 56} variant="ink" />
           </Box>
 
-          {/* Greeting */}
+          {/* Editorial greeting: eyebrow + Fraunces display heading */}
           <Box
+            className="text-center"
             style={{
-              textAlign: 'center',
               marginBottom: isInputCentered ? (isMobile ? 'var(--space-5)' : 'var(--space-6)') : isMobile ? 'var(--space-8)' : '48px',
-              fontFamily: 'var(--font-geist), Geist, system-ui, sans-serif',
               padding: isMobile ? '0 var(--space-4)' : undefined,
+              maxWidth: isMobile ? '100%' : '36rem',
             }}
           >
-            <Text
-              size="4"
-              weight="medium"
-              style={{
-                color: 'var(--slate-12)',
-                display: 'block',
-                marginBottom: 'var(--space-1)',
-              }}
+            <Eyebrow tone="muted" className="mb-4 block">
+              {t('chat.eyebrow', { defaultValue: 'New consultation' })}
+            </Eyebrow>
+            <Heading
+              level="h1"
+              className="!leading-[1.05]"
             >
-              {t('chat.heyUser', { name: greetingName || t('chat.heyUserDefaultName') })}
-            </Text>
-            <Text size="4" weight="medium" style={{ color: 'var(--slate-12)' }}>
-              {t('chat.greeting')}
-            </Text>
+              {t('chat.heyUser', { name: greetingName || t('chat.heyUserDefaultName') }).replace(/\s*👋\s*$/, '')}
+              <br />
+              <em className="italic text-abyss">{t('chat.greeting')}</em>
+            </Heading>
           </Box>
 
           {/* Centered chat input — new-chat landing (assistant or agent); moves to bottom after first send. */}

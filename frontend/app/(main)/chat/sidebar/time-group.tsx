@@ -1,9 +1,7 @@
 'use client';
 
-import { Flex } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
 import { ChatSectionElement, GeneratingTitleItem } from './chat-section-element';
-import { ELEMENT_HEIGHT } from '@/app/components/sidebar';
 import type { PendingConversation } from '@/chat/store';
 import {
   groupByTime,
@@ -76,30 +74,16 @@ export function TimeGroup({
     (a, b) => b.createdAt - a.createdAt
   );
   return (
-    <Flex direction="column">
-      {/* Sub-heading */}
-      <Flex
-        align="center"
-        style={{
-          height: ELEMENT_HEIGHT,
-          padding: '0 var(--space-3)',
-        }}
-      >
-        <span
-          style={{
-            fontSize: 12,
-            fontWeight: 400,
-            lineHeight: 'var(--line-height-1)',
-            letterSpacing: '0.04px',
-            color: 'var(--slate-10)',
-          }}
-        >
+    <div className="flex flex-col">
+      {/* Sub-heading — editorial mono trackeado, dim tone */}
+      <div className="flex items-center h-7 px-3 mt-1">
+        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-dim">
           {t(TIME_GROUP_I18N[label])}
         </span>
-      </Flex>
+      </div>
 
       {/* Chat items */}
-      <Flex direction="column" gap="1">
+      <div className="flex flex-col">
         {pendingSortedNewestFirst.map((pending) => (
           <GeneratingTitleItem key={pending.slotId} slotId={pending.slotId} />
         ))}
@@ -112,7 +96,7 @@ export function TimeGroup({
             agentId={agentId}
           />
         ))}
-      </Flex>
-    </Flex>
+      </div>
+    </div>
   );
 }

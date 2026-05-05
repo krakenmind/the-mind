@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { CHAT_ITEM_HEIGHT } from '@/app/components/sidebar';
+import { cn } from '@/lib/utils/cn';
 
 interface SidebarItemProps {
-  /** Optional left icon (MaterialIcon, Image, any ReactNode) */
+  /** Optional left icon (Lucide / MaterialIcon / Image / any ReactNode) */
   icon?: React.ReactNode;
   /** Label text or ReactNode displayed in the item */
   label: React.ReactNode;
@@ -17,7 +17,7 @@ interface SidebarItemProps {
   href?: string;
   /** Whether this item is currently selected/active */
   isActive?: boolean;
-  /** Text color (default: 'var(--slate-11)') */
+  /** Text color override (Tailwind class). Default uses ink/abyss editorial mapping. */
   textColor?: string;
   /** Font weight (default: 400) */
   fontWeight?: number;
@@ -28,13 +28,14 @@ interface SidebarItemProps {
 }
 
 /**
- * Unified interactive sidebar item.
+ * Editorial sidebar item — Krakenmind paper/teal language.
  *
- * All clickable sidebar elements (nav links, chat items, action buttons)
- * share this component for consistent sizing, spacing, and hover treatment.
- *
- * Hover / active: olive-3 background + olive-4 border
- * Default: transparent background, transparent border
+ * Visual rules:
+ *  - No rounded radius (spreadsheet feel).
+ *  - Default: transparent bg, ink-muted text.
+ *  - Hover: bg-paper-dim, text-ink.
+ *  - Active: bg-paper-dim + 2px abyss left bar + text-abyss medium.
+ *  - Right slot reserved for count chips / kbd badges / row menus.
  */
 export function SidebarItem({
   icon,
@@ -43,13 +44,13 @@ export function SidebarItem({
   onClick,
   href,
   isActive = false,
-  textColor = 'var(--slate-11)',
-  fontWeight = 400,
+  textColor,
+  fontWeight,
   forceHighlight = false,
   onHoverChange,
 }: SidebarItemProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const highlighted = isActive || isHovered || forceHighlight;
+  const highlighted = isHovered || forceHighlight;
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -61,58 +62,55 @@ export function SidebarItem({
     onHoverChange?.(false);
   };
 
-  const sharedStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 'var(--space-2)',
-    width: '100%',
-    height: CHAT_ITEM_HEIGHT,
-    padding: '0 var(--space-3)',
-    boxSizing: 'border-box',
-    flexShrink: 0,
-    borderRadius: 'var(--radius-1)',
-    backgroundColor: highlighted ? 'var(--olive-3)' : 'transparent',
-    border: highlighted ? '1px solid var(--olive-4)' : '1px solid transparent',
-    cursor: (onClick || href) ? 'pointer' : 'default',
-    userSelect: 'none',
-    textDecoration: 'none',
-    color: 'inherit',
+  // Editorial visual states. Active wins over hover; hover wins over default.
+  const stateClass = isActive
+    ? 'bg-paper-dim text-abyss'
+    : highlighted
+      ? 'bg-paper-dim text-ink'
+      : 'bg-transparent text-ink-muted';
+
+  const containerClass = cn(
+    'group relative flex w-full items-center gap-2 select-none',
+    // 32px tall, 12px horizontal padding
+    'h-8 px-3 box-border flex-shrink-0',
+    // No rounded — editorial spreadsheet feel
+    'rounded-none',
+    'transition-colors duration-150',
+    stateClass,
+    (onClick || href) ? 'cursor-pointer' : 'cursor-default',
+  );
+
+  const labelStyle: React.CSSProperties = {
+    flex: 1,
+    fontSize: 13.5,
+    fontWeight: fontWeight ?? (isActive ? 500 : 400),
+    lineHeight: 1.4,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    textAlign: 'left',
+    ...(textColor ? { color: textColor } : {}),
   };
 
   const labelContent = typeof label === 'string' ? (
-    <span
-      style={{
-        flex: 1,
-        fontSize: 14,
-        fontWeight,
-        lineHeight: 'var(--line-height-2)',
-        color: textColor,
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        textAlign: 'left',
-      }}
-    >
-      {label}
-    </span>
+    <span className="font-sans" style={labelStyle}>{label}</span>
   ) : (
-    <div
-      style={{
-        flex: 1,
-        fontSize: 14,
-        fontWeight,
-        lineHeight: 'var(--line-height-2)',
-        color: textColor,
-        overflow: 'hidden',
-        textAlign: 'left',
-      }}
-    >
+    <div className="font-sans" style={{ ...labelStyle, whiteSpace: 'normal' }}>
       {label}
     </div>
   );
 
+  // 2px abyss left bar for active state
+  const activeBar = isActive ? (
+    <span
+      aria-hidden="true"
+      className="absolute left-0 top-0 bottom-0 w-[2px] bg-abyss"
+    />
+  ) : null;
+
   const content = (
     <>
+      {activeBar}
       {icon}
       {labelContent}
       {rightSlot}
@@ -132,35 +130,19 @@ export function SidebarItem({
         <div
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          style={{ ...sharedStyle, padding: 0 }}
+          className={cn(containerClass, 'px-0')}
         >
+          {activeBar}
           <Link
             href={href}
             onClick={handleLinkClick}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--space-2)',
-              flex: 1,
-              minWidth: 0,
-              paddingLeft: 'var(--space-3)',
-              height: '100%',
-              textDecoration: 'none',
-              color: 'inherit',
-              cursor: 'pointer',
-            }}
+            className="flex flex-1 min-w-0 items-center gap-2 h-full pl-3 no-underline text-inherit"
           >
             {icon}
             {labelContent}
           </Link>
           <span
-            style={{ 
-              flexShrink: 0, 
-              display: 'inline-flex', 
-              alignItems: 'center',
-              paddingRight: 'var(--space-3)',
-              height: '100%'
-            }}
+            className="flex-shrink-0 inline-flex items-center pr-3 h-full"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -178,7 +160,7 @@ export function SidebarItem({
         onClick={handleLinkClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={sharedStyle}
+        className={cn(containerClass, 'no-underline text-inherit')}
       >
         {content}
       </Link>
@@ -200,7 +182,7 @@ export function SidebarItem({
       onKeyDown={handleKeyDown}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={sharedStyle}
+      className={containerClass}
     >
       {content}
     </div>

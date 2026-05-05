@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { Flex, Text } from '@radix-ui/themes';
 import { useTranslation } from 'react-i18next';
-import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
-import { ICON_SIZE_DEFAULT } from '@/app/components/sidebar';
+import { LayoutGrid } from 'lucide-react';
 import { useChatStore } from '@/chat/store';
 import { useMobileSidebarStore } from '@/lib/store/mobile-sidebar-store';
 import { useIsMobile } from '@/lib/hooks/use-is-mobile';
@@ -89,7 +87,7 @@ export const MyAgentsSection = React.memo(function MyAgentsSection() {
   }, [isMobile, router]);
 
   return (
-    <Flex direction="column" style={{ flexShrink: 0 }}>
+    <div className="flex flex-col flex-shrink-0">
       <ChatSectionHeader
         title={t('chat.myAgents')}
         onAdd={goCreateAgent}
@@ -97,27 +95,21 @@ export const MyAgentsSection = React.memo(function MyAgentsSection() {
       />
 
       {loadError ? (
-        <Text
-          size="1"
-          style={{ padding: 'var(--space-2) var(--space-3)', color: '#ef4444' }}
-        >
+        <span className="font-sans text-xs text-signal px-3 py-2">
           {t('chat.failedToLoadAgents')}
-        </Text>
+        </span>
       ) : (
-        <Flex direction="column" gap="1">
+        <div className="flex flex-col">
           {isLoading ? (
-            <Flex direction="column" gap="1">
+            <div className="flex flex-col">
               {Array.from({ length: AGENTS_SKELETON_COUNT }, (_, i) => (
                 <ChatItemSkeleton key={i} />
               ))}
-            </Flex>
+            </div>
           ) : visible.length === 0 ? (
-            <Text
-              size="1"
-              style={{ padding: 'var(--space-2) var(--space-3)', color: 'var(--slate-10)' }}
-            >
+            <span className="font-sans text-xs text-ink-dim px-3 py-2">
               {t('chat.noAgentsFound')}
-            </Text>
+            </span>
           ) : (
             visible.map((agent) => {
               const id = agent.id || agent._key;
@@ -148,13 +140,19 @@ export const MyAgentsSection = React.memo(function MyAgentsSection() {
 
           {hasMore && !isLoading && !loadError && (
             <SidebarItem
-              icon={<MaterialIcon name="apps" size={ICON_SIZE_DEFAULT} color="var(--slate-11)" />}
+              icon={
+                <LayoutGrid
+                  size={16}
+                  strokeWidth={1.5}
+                  className="text-ink-muted shrink-0"
+                />
+              }
               label={t('chat.moreAgents')}
               onClick={openMore}
             />
           )}
-        </Flex>
+        </div>
       )}
-    </Flex>
+    </div>
   );
 });

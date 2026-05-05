@@ -1,9 +1,7 @@
 'use client';
 
-import { Flex, Text } from '@radix-ui/themes';
+import { MoreHorizontal } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
-import { ICON_SIZE_DEFAULT } from '@/app/components/sidebar';
 import { ChatSectionHeader } from './chat-section-header';
 import { ChatSectionElement, StartChatButton, ChatItemSkeleton } from './chat-section-element';
 import { SidebarItem } from './sidebar-item';
@@ -84,8 +82,8 @@ export function ChatSection({
     : !conversations || conversations.length === 0;
 
   return (
-    <Flex
-      direction="column"
+    <div
+      className="flex flex-col"
       style={isScrollable ? { flex: 1, minHeight: 0 } : undefined}
     >
       <ChatSectionHeader
@@ -96,42 +94,35 @@ export function ChatSection({
       />
 
       {hasError ? (
-        <Flex direction="column" gap="2" style={{ padding: 'var(--space-2) var(--space-3)' }}>
-          <Text size="1" style={{ color: '#ef4444' }}>
+        <div className="flex flex-col gap-2 px-3 py-2">
+          <span className="font-sans text-xs text-signal">
             {t('chat.failedToLoad')}
-          </Text>
+          </span>
           <StartChatButton onClick={onNewChat} />
-        </Flex>
+        </div>
       ) : (
-        <Flex
-          direction="column"
-          className={isScrollable ? 'no-scrollbar' : undefined}
-          style={{
-            ...(isScrollable ? { overflowY: 'auto', flex: 1 } : {}),
-          }}
+        <div
+          className={`flex flex-col ${isScrollable ? 'no-scrollbar overflow-y-auto flex-1' : ''}`}
         >
           {isLoading ? (
             /* Skeleton loading state */
-            <Flex direction="column" gap="1">
+            <div className="flex flex-col">
               {Array.from({ length: skeletonCount }, (_, i) => (
                 <ChatItemSkeleton key={i} />
               ))}
-            </Flex>
+            </div>
           ) : isEmpty && !showGenerating ? (
             /* Empty state */
             emptyStateText ? (
-              <Text
-                size="1"
-                style={{ padding: 'var(--space-2) var(--space-3)', color: 'var(--slate-10)' }}
-              >
+              <span className="font-sans text-xs text-ink-dim px-3 py-2">
                 {emptyStateText}
-              </Text>
+              </span>
             ) : (
               <StartChatButton onClick={onNewChat} />
             )
           ) : isTimeGrouped ? (
             /* Time-grouped list (Your Chats) */
-            <Flex direction="column">
+            <div className="flex flex-col">
               {timeGroups.map(([label, convs]) => (
                 <TimeGroup
                   key={label}
@@ -154,10 +145,10 @@ export function ChatSection({
                   agentId={agentId}
                 />
               )}
-            </Flex>
+            </div>
           ) : (
             /* Flat list (Shared Chats) */
-            <Flex direction="column" gap="1">
+            <div className="flex flex-col">
               {conversations!.map((conv) => (
                 <ChatSectionElement
                   key={conv.id}
@@ -167,16 +158,14 @@ export function ChatSection({
                   agentId={agentId}
                 />
               ))}
-            </Flex>
+            </div>
           )}
 
           {/* "⋯ More" overflow button */}
-          {hasMore && (
-            <MoreButton onClick={onMore} />
-          )}
-        </Flex>
+          {hasMore && <MoreButton onClick={onMore} />}
+        </div>
       )}
-    </Flex>
+    </div>
   );
 }
 
@@ -188,7 +177,13 @@ function MoreButton({ onClick }: { onClick?: () => void }) {
   const { t } = useTranslation();
   return (
     <SidebarItem
-      icon={<MaterialIcon name="more_horiz" size={ICON_SIZE_DEFAULT} color="var(--slate-11)" />}
+      icon={
+        <MoreHorizontal
+          size={16}
+          strokeWidth={1.5}
+          className="text-ink-muted shrink-0"
+        />
+      }
       label={t('common.more')}
       onClick={onClick}
     />

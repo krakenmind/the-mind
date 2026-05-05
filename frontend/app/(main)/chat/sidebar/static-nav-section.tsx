@@ -1,10 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { Flex } from '@radix-ui/themes';
-import { ChatStarIcon } from '@/app/components/ui/chat-star-icon';
-import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
-import { KBD_BADGE_PADDING, ICON_SIZE_DEFAULT } from '@/app/components/sidebar';
+import { Plus, Search, Folder, FileText } from 'lucide-react';
 import { useCommandStore } from '@/lib/store/command-store';
 import { useTranslation } from 'react-i18next';
 import { getModifierSymbol } from '@/lib/utils/platform';
@@ -17,39 +14,39 @@ import { SidebarItem } from './sidebar-item';
 // ========================================
 
 interface NavItem {
-  icon: string;
+  icon: React.ComponentType<{ className?: string; size?: number; strokeWidth?: number }>;
   labelKey: string;
   route: string;
 }
 
 /** Primary navigation items — labels resolved via i18n */
 const MAIN_NAV_ITEMS: NavItem[] = [
-  // { icon: 'search', labelKey: 'nav.searchChats', route: '/search' },
-  { icon: 'folder', labelKey: 'nav.collections', route: '/knowledge-base/' },
-  { icon: 'inventory_2', labelKey: 'nav.allRecords', route: '/knowledge-base/?view=all-records' },
+  { icon: Folder, labelKey: 'nav.collections', route: '/knowledge-base/' },
+  { icon: FileText, labelKey: 'nav.allRecords', route: '/knowledge-base/?view=all-records' },
 ];
 
 // ========================================
 // Components
 // ========================================
 
-/** Keyboard shortcut badge */
+/** Editorial keyboard shortcut badge — mono, ink-muted, hairline. */
 const KbdBadge = ({ children }: { children: React.ReactNode }) => (
-  <span
-    style={{
-      background: 'var(--slate-1)',
-      border: '1px solid var(--slate-3)',
-      padding: KBD_BADGE_PADDING,
-      borderRadius: 'var(--radius-2)',
-      fontSize: 12,
-      lineHeight: 'var(--line-height-1)',
-      letterSpacing: '0.04px',
-      color: 'var(--slate-12)',
-      fontWeight: 400,
-    }}
-  >
+  <span className="font-mono text-[10.5px] tracking-[0.04em] text-ink-muted border border-rule-soft px-1.5 py-[1px] bg-paper">
     {children}
   </span>
+);
+
+/** Lucide icon wrapper applying the editorial muted/ink stroke. */
+const NavIcon = ({
+  Icon,
+}: {
+  Icon: React.ComponentType<{ className?: string; size?: number; strokeWidth?: number }>;
+}) => (
+  <Icon
+    size={16}
+    strokeWidth={1.5}
+    className="text-ink-muted group-hover:text-ink shrink-0"
+  />
 );
 
 /**
@@ -72,38 +69,40 @@ export function StaticNavSection() {
   };
 
   return (
-    <Flex direction="column" gap="1">
-      {/* New Chat */}
+    <div className="flex flex-col">
+      {/* New Chat — abyss-colored to feel like the primary editorial accent */}
       <SidebarItem
         icon={
-          <ChatStarIcon
-            size={ICON_SIZE_DEFAULT}
-            color="var(--accent-a11)"
+          <Plus
+            size={16}
+            strokeWidth={1.75}
+            className="text-abyss shrink-0"
           />
         }
         label={t('chat.newChat')}
         onClick={handleNewChat}
-        textColor="var(--accent-a11)"
+        textColor="var(--color-abyss)"
         fontWeight={500}
       />
+
       {/* Search Chats — opens command palette (⌘+K) */}
-        <SidebarItem
-          icon={<MaterialIcon name={'search'} size={ICON_SIZE_DEFAULT} />}
-          label={t('nav.searchChats')}
-          onClick={handleOpenSearch}
-          rightSlot={<KbdBadge>{modKey} +K</KbdBadge>}
-        />
+      <SidebarItem
+        icon={<NavIcon Icon={Search} />}
+        label={t('nav.searchChats')}
+        onClick={handleOpenSearch}
+        rightSlot={<KbdBadge>{modKey}+K</KbdBadge>}
+      />
 
       {/* Navigation items — hidden on mobile */}
       {!isMobile &&
         MAIN_NAV_ITEMS.map((item) => (
           <SidebarItem
             key={item.route}
-            icon={<MaterialIcon name={item.icon} size={ICON_SIZE_DEFAULT} />}
+            icon={<NavIcon Icon={item.icon} />}
             label={t(item.labelKey)}
             href={item.route}
           />
         ))}
-    </Flex>
+    </div>
   );
 }

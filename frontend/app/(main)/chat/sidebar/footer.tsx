@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Flex, Box, Text } from '@radix-ui/themes';
-import { MaterialIcon } from '@/app/components/ui/MaterialIcon';
+import { ChevronsUpDown } from 'lucide-react';
 import { UserAvatar } from '@/app/components/ui/user-avatar';
-import { HEADER_ELEMENT_SIZE, ICON_SIZE_DEFAULT } from '@/app/components/sidebar';
+import { Eyebrow } from '@/app/components/editorial/typography';
 import { WorkspaceMenu } from '@/app/components/workspace-menu';
 import type { OrgInfo } from '@/app/components/workspace-menu';
 import { fetchOrgWithLogo } from '@/chat/api';
 
 /**
  * Sidebar footer — organisation selector button + popup menu.
+ *
+ * Editorial Krakenmind skin: hairline border-top, mono uppercase eyebrow
+ * ("ORGANIZACIÓN"), Geist sans for org name, paper-dim hover, no radius.
  *
  * Fetches organisation details on mount (not on popup open) and
  * caches the result for the session.
@@ -38,9 +40,10 @@ export function ChatSidebarFooter() {
   }, []);
 
   const orgLogoUrl = org?.logoUrl ?? null;
+  const orgName = org?.shortName || org?.registeredName;
 
   return (
-    <Box style={{ padding: 'var(--space-2)', position: 'relative' }}>
+    <div className="relative border-t border-rule bg-paper">
       <WorkspaceMenu
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
@@ -48,52 +51,49 @@ export function ChatSidebarFooter() {
         triggerRef={triggerRef}
       />
 
-      <Flex
+      <div
         ref={triggerRef}
-        align="center"
-        gap="2"
         onClick={() => setIsMenuOpen((prev) => !prev)}
-        style={{
-          width: '100%',
-          height: 40,
-          padding: 'var(--space-2)',
-          background: 'var(--olive-2)',
-          border: '1px solid var(--olive-3)',
-          borderRadius: 'var(--radius-1)',
-          cursor: 'pointer',
+        role="button"
+        tabIndex={0}
+        aria-expanded={isMenuOpen}
+        aria-haspopup="menu"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsMenuOpen((prev) => !prev);
+          }
         }}
+        className="group flex w-full cursor-pointer items-center gap-3 px-4 py-3 transition-colors hover:bg-paper-dim focus:bg-paper-dim focus:outline-none"
       >
         {/* Org avatar — logo if available, else initial */}
         <UserAvatar
-          fullName={org?.shortName || org?.registeredName}
+          fullName={orgName}
           src={orgLogoUrl}
-          size={HEADER_ELEMENT_SIZE}
-          radius="small"
+          size={28}
+          radius="none"
         />
 
-        {/* Org name */}
-        <Text
-          size="2"
-          weight="medium"
-          style={{
-            flex: 1,
-            textAlign: 'left',
-            color: 'var(--emerald-12)',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {org?.shortName || org?.registeredName}
-        </Text>
+        {/* Org meta — eyebrow + name */}
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+          <Eyebrow tone="dim" className="text-[9.5px] tracking-[0.2em]">
+            Organización
+          </Eyebrow>
+          <span
+            className="truncate font-sans text-[13.5px] font-medium leading-tight text-ink"
+            title={orgName}
+          >
+            {orgName ?? '—'}
+          </span>
+        </div>
 
-        <MaterialIcon
-          name={isMenuOpen ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
-          size={ICON_SIZE_DEFAULT}
-          color="var(--slate-11)"
-          style={{ userSelect: 'none' }}
+        <ChevronsUpDown
+          size={14}
+          strokeWidth={1.5}
+          className="shrink-0 text-ink-dim transition-colors group-hover:text-ink-muted"
+          aria-hidden="true"
         />
-      </Flex>
-    </Box>
+      </div>
+    </div>
   );
 }

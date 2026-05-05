@@ -378,6 +378,7 @@
     "record": "Datensatz"
   },
   "chat": {
+    "eyebrow": "Neue Beratung",
     "greeting": "Was möchten Sie heute erkunden?",
     "heyUser": "Hey, {{name}} 👋",
     "heyUserDefaultName": "du",

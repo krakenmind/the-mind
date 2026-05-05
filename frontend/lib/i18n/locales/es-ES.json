@@ -377,6 +377,7 @@
     "record": "registro"
   },
   "chat": {
+    "eyebrow": "Consulta nueva",
     "greeting": "¿Qué quieres explorar hoy?",
     "heyUser": "Hola, {{name}} 👋",
     "heyUserDefaultName": "amigo",
